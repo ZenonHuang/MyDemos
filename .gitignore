@@ -2,6 +2,12 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+#忽略子目录下的对应文件
+**/build/
+**/DerivedData/
+**/Pods/
+**/xcuserdata/
+
 ## Build generated
 build/
 DerivedData/

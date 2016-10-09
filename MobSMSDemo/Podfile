@@ -1,0 +1,9 @@
+platform :ios, '8.0'
+# ignoring warning from pods
+inhibit_all_warnings!
+target 'MobSMSDemo' do
+# Mob产品公共库
+pod 'MOBFoundation_IDFA'
+# SMSSDK必须
+pod 'SMSSDK'
+end
