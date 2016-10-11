@@ -21,8 +21,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.phoneNumber = @"18673556610";
-    self.areaCode = @"86";
+    self.phoneNumber = @"96120493";
+    self.areaCode = @"65";
 }
 
 - (void)didReceiveMemoryWarning
