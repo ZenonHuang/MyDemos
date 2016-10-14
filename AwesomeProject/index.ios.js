@@ -12,14 +12,21 @@ import {
   View
 } from 'react-native';
 
+//label组件写法
+class Label extends React.Component{
+    render(){
+    }
+}
 
-  var MOCKED_MOVIES_DATA = [
-  {title: 'Title', year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}},
-];
 export default class AwesomeProject extends Component {
+
   render() {
     return (
+
       <View style={styles.container}>
+        <Text style={styles.testText}>
+        标题
+        </Text>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -36,6 +43,11 @@ export default class AwesomeProject extends Component {
 }
 
 const styles = StyleSheet.create({
+  testText: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
