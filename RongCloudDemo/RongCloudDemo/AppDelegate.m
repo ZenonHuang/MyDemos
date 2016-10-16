@@ -9,6 +9,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -21,19 +22,7 @@
   //1.初始化sdk
   [[RCIM sharedRCIM] initWithAppKey:@"lmxuhwagxh3ud"];
   //2.获取token，必须由服务端获取。这里直接从控制台调试获得了
-  //3.连接服务器
- 
-  [[RCIM sharedRCIM] connectWithToken:@"66YLA34rwjSkX70vuqsvtbmS1kkuf2mnZxVQMMqcQdTbUGn+2hIz1T/zf/wsfvFuPJqcxZMVRix41ERvIVbStw==" success:^(NSString *userId) {
-    NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
-  } error:^(RCConnectErrorCode status) {
-    NSLog(@"登陆的错误码为:%li", status);
-  } tokenIncorrect:^{
-    //token过期或者不正确。
-    //如果设置了token有效期并且token过期，请重新请求您的服务器获取新的token
-    //如果没有设置token有效期却提示token错误，请检查您客户端和服务器的appkey是否匹配，还有检查您获取token的流程。
-    NSLog(@"token错误");
-  }];
-  return YES;
+    return YES;
 }
 
 
