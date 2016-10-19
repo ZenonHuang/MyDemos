@@ -149,16 +149,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25180A981DB7CC0800BB6A34 /* 神奇移动 */ = {
+			isa = PBXGroup;
+			children = (
+				25245BFC1CF7467600AECF2D /* HZSecondViewController.h */,
+				25245BFD1CF7468700AECF2D /* HZSecondViewController.m */,
+				25245BCF1CF7401A00AECF2D /* HZTransitionViewController.h */,
+				25245BD01CF7402D00AECF2D /* HZTransitionViewController.m */,
+			);
+			path = "神奇移动";
+			sourceTree = "<group>";
+		};
+		25180A991DB7CC2E00BB6A34 /* 进度翻转 */ = {
+			isa = PBXGroup;
+			children = (
+				4008872C1CF5CDDA00459DE2 /* SeccondViewController.h */,
+				4008872D1CF5CDDA00459DE2 /* SeccondViewController.m */,
+				400886FF1CF5CDB200459DE2 /* ViewController.h */,
+				400887001CF5CDB200459DE2 /* ViewController.m */,
+			);
+			path = "进度翻转";
+			sourceTree = "<group>";
+		};
+		25180A9A1DB7CC7A00BB6A34 /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				40F969AE1CF6807100772EE0 /* QQSecondViewController.h */,
+				40F969AF1CF6807100772EE0 /* QQSecondViewController.m */,
+				40F969AC1CF6807100772EE0 /* QQViewController.h */,
+				40F969AD1CF6807100772EE0 /* QQViewController.m */,
+			);
+			path = QQ;
+			sourceTree = "<group>";
+		};
+		25180A9B1DB7CCA700BB6A34 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				400886FC1CF5CDB200459DE2 /* AppDelegate.h */,
+				400886FD1CF5CDB200459DE2 /* AppDelegate.m */,
+				400887051CF5CDB200459DE2 /* Assets.xcassets */,
+				4008870A1CF5CDB200459DE2 /* Info.plist */,
+				400887071CF5CDB200459DE2 /* LaunchScreen.storyboard */,
+				400887021CF5CDB200459DE2 /* Main.storyboard */,
+				40F969A21CF67FF100772EE0 /* mojiezuo.jpg */,
+				400887321CF5CEBF00459DE2 /* wuyanzu.jpg */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		25245BD21CF740D900AECF2D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				25245BD31CF740D900AECF2D /* HZUIKit.h */,
 				25245BD41CF740D900AECF2D /* UIButton */,
 				25245BD91CF740D900AECF2D /* UIColor */,
 				25245BDC1CF740D900AECF2D /* UIImageView */,
 				25245BDF1CF740D900AECF2D /* UILabel */,
 				25245BE21CF740D900AECF2D /* UIView */,
 				25245BEC1CF740D900AECF2D /* UIViewController */,
+				25245BD31CF740D900AECF2D /* HZUIKit.h */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -234,21 +282,21 @@
 		25245BFF1CF74AE600AECF2D /* HZTransition */ = {
 			isa = PBXGroup;
 			children = (
-				25245C031CF74DC500AECF2D /* HZTransitionFromSecondToFirst.h */,
-				25245C041CF74DC500AECF2D /* HZTransitionFromSecondToFirst.m */,
 				25245C001CF74B4A00AECF2D /* HZTransitionFromFirstToSecond.h */,
 				25245C011CF74B4A00AECF2D /* HZTransitionFromFirstToSecond.m */,
+				25245C031CF74DC500AECF2D /* HZTransitionFromSecondToFirst.h */,
+				25245C041CF74DC500AECF2D /* HZTransitionFromSecondToFirst.m */,
 			);
-			name = HZTransition;
+			path = HZTransition;
 			sourceTree = "<group>";
 		};
 		400886ED1CF5CDB200459DE2 = {
 			isa = PBXGroup;
 			children = (
+				400886F71CF5CDB200459DE2 /* Products */,
 				400886F81CF5CDB200459DE2 /* Transition */,
 				400887121CF5CDB200459DE2 /* TransitionTests */,
 				4008871D1CF5CDB200459DE2 /* TransitionUITests */,
-				400886F71CF5CDB200459DE2 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,19 +313,12 @@
 		400886F81CF5CDB200459DE2 /* Transition */ = {
 			isa = PBXGroup;
 			children = (
-				25245BFF1CF74AE600AECF2D /* HZTransition */,
-				25245BD21CF740D900AECF2D /* UIKit */,
-				40F969A51CF6800400772EE0 /* Transition */,
 				40F969A41CF67FFC00772EE0 /* Controller */,
-				40F969A21CF67FF100772EE0 /* mojiezuo.jpg */,
-				400887321CF5CEBF00459DE2 /* wuyanzu.jpg */,
-				400886FC1CF5CDB200459DE2 /* AppDelegate.h */,
-				400886FD1CF5CDB200459DE2 /* AppDelegate.m */,
-				400887021CF5CDB200459DE2 /* Main.storyboard */,
-				400887051CF5CDB200459DE2 /* Assets.xcassets */,
-				400887071CF5CDB200459DE2 /* LaunchScreen.storyboard */,
-				4008870A1CF5CDB200459DE2 /* Info.plist */,
+				25245BFF1CF74AE600AECF2D /* HZTransition */,
+				25180A9B1DB7CCA700BB6A34 /* Other */,
 				400886F91CF5CDB200459DE2 /* Supporting Files */,
+				40F969A51CF6800400772EE0 /* Transition */,
+				25245BD21CF740D900AECF2D /* UIKit */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -287,14 +328,14 @@
 			children = (
 				400886FA1CF5CDB200459DE2 /* main.m */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		400887121CF5CDB200459DE2 /* TransitionTests */ = {
 			isa = PBXGroup;
 			children = (
-				400887131CF5CDB200459DE2 /* TransitionTests.m */,
 				400887151CF5CDB200459DE2 /* Info.plist */,
+				400887131CF5CDB200459DE2 /* TransitionTests.m */,
 			);
 			path = TransitionTests;
 			sourceTree = "<group>";
@@ -302,8 +343,8 @@
 		4008871D1CF5CDB200459DE2 /* TransitionUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4008871E1CF5CDB200459DE2 /* TransitionUITests.m */,
 				400887201CF5CDB200459DE2 /* Info.plist */,
+				4008871E1CF5CDB200459DE2 /* TransitionUITests.m */,
 			);
 			path = TransitionUITests;
 			sourceTree = "<group>";
@@ -311,22 +352,13 @@
 		40F969A41CF67FFC00772EE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				400886FF1CF5CDB200459DE2 /* ViewController.h */,
-				400887001CF5CDB200459DE2 /* ViewController.m */,
-				4008872C1CF5CDDA00459DE2 /* SeccondViewController.h */,
-				4008872D1CF5CDDA00459DE2 /* SeccondViewController.m */,
-				40F969AC1CF6807100772EE0 /* QQViewController.h */,
-				40F969AD1CF6807100772EE0 /* QQViewController.m */,
-				40F969AE1CF6807100772EE0 /* QQSecondViewController.h */,
-				40F969AF1CF6807100772EE0 /* QQSecondViewController.m */,
+				25180A9A1DB7CC7A00BB6A34 /* QQ */,
+				25180A981DB7CC0800BB6A34 /* 神奇移动 */,
+				25180A991DB7CC2E00BB6A34 /* 进度翻转 */,
 				40F969B21CF682C100772EE0 /* ListTableViewController.h */,
 				40F969B31CF682C100772EE0 /* ListTableViewController.m */,
-				25245BCF1CF7401A00AECF2D /* HZTransitionViewController.h */,
-				25245BD01CF7402D00AECF2D /* HZTransitionViewController.m */,
-				25245BFC1CF7467600AECF2D /* HZSecondViewController.h */,
-				25245BFD1CF7468700AECF2D /* HZSecondViewController.m */,
 			);
-			name = Controller;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		40F969A51CF6800400772EE0 /* Transition */ = {
@@ -336,14 +368,14 @@
 				400887381CF5E25400459DE2 /* PopTransiton.m */,
 				4008872F1CF5CE0100459DE2 /* PushTransition.h */,
 				400887301CF5CE0100459DE2 /* PushTransition.m */,
-				40F969A61CF6804400772EE0 /* TransitionFromSecondToFirst.h */,
-				40F969A71CF6804400772EE0 /* TransitionFromSecondToFirst.m */,
-				40F969A81CF6804400772EE0 /* TransitionFromFirstToSecond.h */,
-				40F969A91CF6804400772EE0 /* TransitionFromFirstToSecond.m */,
 				40F969B51CF729F500772EE0 /* PushTransitionTest.h */,
 				40F969B61CF729F500772EE0 /* PushTransitionTest.m */,
+				40F969A81CF6804400772EE0 /* TransitionFromFirstToSecond.h */,
+				40F969A91CF6804400772EE0 /* TransitionFromFirstToSecond.m */,
+				40F969A61CF6804400772EE0 /* TransitionFromSecondToFirst.h */,
+				40F969A71CF6804400772EE0 /* TransitionFromSecondToFirst.m */,
 			);
-			name = Transition;
+			path = Transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -544,6 +576,7 @@
 				400887031CF5CDB200459DE2 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		400887071CF5CDB200459DE2 /* LaunchScreen.storyboard */ = {
@@ -552,6 +585,7 @@
 				400887081CF5CDB200459DE2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -649,7 +683,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Transition/Info.plist;
+				INFOPLIST_FILE = Transition/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zangqilong.Transition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -660,7 +694,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Transition/Info.plist;
+				INFOPLIST_FILE = Transition/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zangqilong.Transition;
 				PRODUCT_NAME = "$(TARGET_NAME)";
