@@ -1,12 +1,18 @@
 PODS:
   - IMYAOPTableView (1.7)
+  - IQKeyboardManager (4.0.7)
+  - MJRefresh (3.1.12)
 
 DEPENDENCIES:
   - IMYAOPTableView
+  - IQKeyboardManager (~> 4.0.7)
+  - MJRefresh (~> 3.1.12)
 
 SPEC CHECKSUMS:
   IMYAOPTableView: 268ef07404d2276bd2d1023da5296ec16dc7ed34
+  IQKeyboardManager: 69002bb4fea60596b710e57d426abc00e5063630
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
 
-PODFILE CHECKSUM: 2597de2bdedc7c1e061137f8bb8f10e744612b85
+PODFILE CHECKSUM: 8004d904da17d4a2f12e76d5369b0c7aa4f56a23
 
 COCOAPODS: 1.1.1

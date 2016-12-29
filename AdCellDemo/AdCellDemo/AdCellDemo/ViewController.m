@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "HZAdAOP.h"
+#import <MJRefresh.h>
 
 static NSString *const cellID=@"tableViewCellID";
 
@@ -56,6 +57,11 @@ static NSString *const cellID=@"tableViewCellID";
            forCellReuseIdentifier:cellID];
         _tableView.delegate=self;
         _tableView.dataSource=self;
+        
+        _tableView.mj_header=[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [_tableView.mj_header endRefreshing];            
+        }];
+
     }
     return _tableView;
 }
