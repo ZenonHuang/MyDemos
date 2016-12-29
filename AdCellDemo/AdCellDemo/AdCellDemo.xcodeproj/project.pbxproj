@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		257B98721E15561000FB27DB /* HZAdAOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 257B98711E15561000FB27DB /* HZAdAOP.m */; };
 		25CC85281E140A3700FF87A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC85271E140A3700FF87A1 /* main.m */; };
 		25CC852B1E140A3700FF87A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC852A1E140A3700FF87A1 /* AppDelegate.m */; };
 		25CC852E1E140A3700FF87A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CC852D1E140A3700FF87A1 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		257B98701E15561000FB27DB /* HZAdAOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZAdAOP.h; sourceTree = "<group>"; };
+		257B98711E15561000FB27DB /* HZAdAOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZAdAOP.m; sourceTree = "<group>"; };
 		25CC85231E140A3700FF87A1 /* AdCellDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdCellDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25CC85271E140A3700FF87A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		25CC85291E140A3700FF87A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -44,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		257B986F1E15560500FB27DB /* AOP */ = {
+			isa = PBXGroup;
+			children = (
+				257B98701E15561000FB27DB /* HZAdAOP.h */,
+				257B98711E15561000FB27DB /* HZAdAOP.m */,
+			);
+			name = AOP;
+			sourceTree = "<group>";
+		};
 		25CC851A1E140A3700FF87A1 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +77,7 @@
 		25CC85251E140A3700FF87A1 /* AdCellDemo */ = {
 			isa = PBXGroup;
 			children = (
+				257B986F1E15560500FB27DB /* AOP */,
 				25CC85291E140A3700FF87A1 /* AppDelegate.h */,
 				25CC852A1E140A3700FF87A1 /* AppDelegate.m */,
 				25CC852C1E140A3700FF87A1 /* ViewController.h */,
@@ -200,7 +213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EBC1F62965FDE9EDD61DAACF /* [CP] Copy Pods Resources */ = {
@@ -228,6 +241,7 @@
 				25CC852E1E140A3700FF87A1 /* ViewController.m in Sources */,
 				25CC852B1E140A3700FF87A1 /* AppDelegate.m in Sources */,
 				25CC85281E140A3700FF87A1 /* main.m in Sources */,
+				257B98721E15561000FB27DB /* HZAdAOP.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +398,7 @@
 				25CC853C1E140A3700FF87A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
