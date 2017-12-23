@@ -1,0 +1,4 @@
+target 'LayoutTest' do
+#  pod "FlexBoxLayout"
+  pod 'YogaKit','1.3'
+end
