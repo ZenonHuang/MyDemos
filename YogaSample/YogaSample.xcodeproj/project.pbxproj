@@ -21,6 +21,7 @@
 		2532B1E91FEF7DB300CA3D50 /* YGEnums.c in Sources */ = {isa = PBXBuildFile; fileRef = 2532B1DA1FEF7DB300CA3D50 /* YGEnums.c */; };
 		2532B1EA1FEF7DB300CA3D50 /* YGNodeList.c in Sources */ = {isa = PBXBuildFile; fileRef = 2532B1DD1FEF7DB300CA3D50 /* YGNodeList.c */; };
 		2532B1EB1FEF7DB300CA3D50 /* Yoga.c in Sources */ = {isa = PBXBuildFile; fileRef = 2532B1DF1FEF7DB300CA3D50 /* Yoga.c */; };
+		D60419BF1FF0A77400D1478B /* YGSampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60419BE1FF0A77400D1478B /* YGSampleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		2532B1DE1FEF7DB300CA3D50 /* YGNodeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNodeList.h; sourceTree = "<group>"; };
 		2532B1DF1FEF7DB300CA3D50 /* Yoga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Yoga.c; sourceTree = "<group>"; };
 		2532B1E01FEF7DB300CA3D50 /* Yoga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yoga.h; sourceTree = "<group>"; };
+		D60419BD1FF0A76600D1478B /* YGSampleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YGSampleView.h; sourceTree = "<group>"; };
+		D60419BE1FF0A77400D1478B /* YGSampleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YGSampleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				2532B1BE1FEF7D7700CA3D50 /* LaunchScreen.storyboard */,
 				2532B1C11FEF7D7700CA3D50 /* Info.plist */,
 				2532B1C21FEF7D7700CA3D50 /* main.m */,
+				D60419BD1FF0A76600D1478B /* YGSampleView.h */,
+				D60419BE1FF0A77400D1478B /* YGSampleView.m */,
 			);
 			path = YogaSample;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 			files = (
 				2532B1E41FEF7DB300CA3D50 /* UIView+Yoga.m in Sources */,
 				2532B1B81FEF7D7700CA3D50 /* ViewController.m in Sources */,
+				D60419BF1FF0A77400D1478B /* YGSampleView.m in Sources */,
 				2532B1EA1FEF7DB300CA3D50 /* YGNodeList.c in Sources */,
 				2532B1E91FEF7DB300CA3D50 /* YGEnums.c in Sources */,
 				2532B1C31FEF7D7700CA3D50 /* main.m in Sources */,
