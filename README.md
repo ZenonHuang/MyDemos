@@ -1,24 +1,22 @@
 # MyDemos
 用以实验各种功能的小Demo集合
 
-## MobSMSDemo 2016/10/8
-手机短信验证
+- MobSMSDemo 手机短信验证 2016/10/8 
 
-## doubleTapDemo 2016/10/14
-双击tabBar刷新原理（双击判断，双击间隔）
+- doubleTapDemo 双击tabBar刷新原理（双击判断，双击间隔） 2016/10/14
 
-## aswsomeDemo (React-native) 2016/10/14
-react-native的示例工程
+- aswsomeDemo (React-native) react-native的示例工程 2016/10/14
 
-## MaskDemo 2016/10/14
-mask效果
+- MaskDemo mask效果 2016/10/14
 
-## PulsingHalo 2016/10/15
-光圈效果
+- PulsingHalo 光圈效果 2016/10/15
 
-## RongCloudDemo 2016/10/16
-融云sdk 接入使用
+- RongCloudDemo 融云sdk 接入使用 2016/10/16
 
-## TransitionDemo 2016/10/18
-转场效果
+- TransitionDemo 转场效果 2016/10/18
+
+- LyoutTest frame/Auto Layout/FlexBox布局测试 2017/12/23
+
+- YogaSample Yoga使用 2017/12/25
+
 
