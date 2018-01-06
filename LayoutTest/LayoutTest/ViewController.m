@@ -10,6 +10,32 @@
 #import "Masonry.h"
 #import <UIView+Yoga.h>
 #import <YGLayout.h>
+#import <objc/Runtime.h>
+
+
+typedef struct {
+    CGRect frame;
+    CGSize size;
+    CGPoint orign;
+}TestFrame;
+
+typedef struct {
+    int  one;
+    int  two;
+}TestNumber;
+
+typedef struct {
+    TestFrame frame1;
+    TestFrame frame2;
+    TestFrame frame3;
+    TestFrame frame4;
+    TestFrame frame5;
+    TestFrame frame6;
+    TestFrame frame7;
+    TestFrame frame8;
+    TestFrame frame9;
+    TestFrame frame10;
+}TestDoubleFrame;
 
 @interface ViewController ()
 @property (nonatomic) UITableView *tableView;
@@ -137,7 +163,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [_textField becomeFirstResponder];
+//    [_textField becomeFirstResponder];
 }
 
 
@@ -152,7 +178,54 @@
 }
 
 #pragma mark AutoLayout 非嵌套
+-(void)getNumStruct{
+    return ;
+}
+-(TestFrame)getStruct{
+    
+    CGRect frame =(CGRect) { 
+        .origin = (CGPoint){ .x =1,.y =1,},
+        .size   = (CGSize){  .width = 1, .height=1},
+    };
+    
+    CGSize size = (CGSize){  .width = 1, .height=1};
+    CGPoint point =  (CGPoint){ .x =1,.y =1,};
+    
+    return (TestFrame){
+        .frame = frame,
+        .size  = size,
+        .orign  = point,
+    };
+}
+
+- (TestDoubleFrame)getTestStruct{
+    
+    return (TestDoubleFrame){
+        .frame1 = [self getStruct],
+        .frame2 = [self getStruct],
+        .frame3 = [self getStruct],
+        .frame4 = [self getStruct],
+        .frame5 = [self getStruct],
+        .frame6 = [self getStruct],
+        .frame7 = [self getStruct],
+        .frame8 = [self getStruct],
+        .frame9 = [self getStruct],
+        .frame10 = [self getStruct],
+    };
+}
+
 - (void)generateViews {
+    
+    Method method = class_getInstanceMethod(self.class, @selector(getNumStruct));
+    const char *encoding = method_getTypeEncoding(method);
+    
+    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:encoding];
+    NSLog(@"debug Desc %@",methodSignature.debugDescription);
+    
+    NSUInteger valueSize = 0;
+    NSGetSizeAndAlignment(encoding, &valueSize, NULL);
+    
+    return;
     NSInteger number = _textField.text.integerValue;
     
     for (int i=0; i<100 ;i++) {

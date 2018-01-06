@@ -22,6 +22,10 @@
 		2532B1EA1FEF7DB300CA3D50 /* YGNodeList.c in Sources */ = {isa = PBXBuildFile; fileRef = 2532B1DD1FEF7DB300CA3D50 /* YGNodeList.c */; };
 		2532B1EB1FEF7DB300CA3D50 /* Yoga.c in Sources */ = {isa = PBXBuildFile; fileRef = 2532B1DF1FEF7DB300CA3D50 /* Yoga.c */; };
 		D60419BF1FF0A77400D1478B /* YGSampleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D60419BE1FF0A77400D1478B /* YGSampleView.m */; };
+		D68D3A6B1FFB80070013D160 /* YGSampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D68D3A6A1FFB80070013D160 /* YGSampleTableViewController.m */; };
+		D68D3A6E1FFB868D0013D160 /* YGFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D68D3A6C1FFB868D0013D160 /* YGFeedCell.m */; };
+		D68D3A741FFB877B0013D160 /* YGFeedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D68D3A731FFB877B0013D160 /* YGFeedEntity.m */; };
+		D68D3A761FFB89F80013D160 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = D68D3A751FFB89F80013D160 /* data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +56,13 @@
 		2532B1E01FEF7DB300CA3D50 /* Yoga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yoga.h; sourceTree = "<group>"; };
 		D60419BD1FF0A76600D1478B /* YGSampleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YGSampleView.h; sourceTree = "<group>"; };
 		D60419BE1FF0A77400D1478B /* YGSampleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YGSampleView.m; sourceTree = "<group>"; };
+		D68D3A691FFB7FF90013D160 /* YGSampleTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YGSampleTableViewController.h; sourceTree = "<group>"; };
+		D68D3A6A1FFB80070013D160 /* YGSampleTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YGSampleTableViewController.m; sourceTree = "<group>"; };
+		D68D3A6C1FFB868D0013D160 /* YGFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGFeedCell.m; sourceTree = "<group>"; };
+		D68D3A6D1FFB868D0013D160 /* YGFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGFeedCell.h; sourceTree = "<group>"; };
+		D68D3A721FFB877A0013D160 /* YGFeedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGFeedEntity.h; sourceTree = "<group>"; };
+		D68D3A731FFB877B0013D160 /* YGFeedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGFeedEntity.m; sourceTree = "<group>"; };
+		D68D3A751FFB89F80013D160 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +95,7 @@
 		2532B1B21FEF7D7700CA3D50 /* YogaSample */ = {
 			isa = PBXGroup;
 			children = (
+				D68D3A6F1FFB87050013D160 /* Sample */,
 				2532B1C91FEF7DB300CA3D50 /* YogaKit */,
 				2532B1B31FEF7D7700CA3D50 /* AppDelegate.h */,
 				2532B1B41FEF7D7700CA3D50 /* AppDelegate.m */,
@@ -94,8 +106,6 @@
 				2532B1BE1FEF7D7700CA3D50 /* LaunchScreen.storyboard */,
 				2532B1C11FEF7D7700CA3D50 /* Info.plist */,
 				2532B1C21FEF7D7700CA3D50 /* main.m */,
-				D60419BD1FF0A76600D1478B /* YGSampleView.h */,
-				D60419BE1FF0A77400D1478B /* YGSampleView.m */,
 			);
 			path = YogaSample;
 			sourceTree = "<group>";
@@ -136,6 +146,38 @@
 				2532B1D41FEF7DB300CA3D50 /* YGLayout.m */,
 			);
 			path = YogaKit;
+			sourceTree = "<group>";
+		};
+		D68D3A6F1FFB87050013D160 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				D68D3A711FFB872E0013D160 /* TableView */,
+				D68D3A701FFB87220013D160 /* Normal */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		D68D3A701FFB87220013D160 /* Normal */ = {
+			isa = PBXGroup;
+			children = (
+				D60419BD1FF0A76600D1478B /* YGSampleView.h */,
+				D60419BE1FF0A77400D1478B /* YGSampleView.m */,
+			);
+			path = Normal;
+			sourceTree = "<group>";
+		};
+		D68D3A711FFB872E0013D160 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				D68D3A751FFB89F80013D160 /* data.json */,
+				D68D3A721FFB877A0013D160 /* YGFeedEntity.h */,
+				D68D3A731FFB877B0013D160 /* YGFeedEntity.m */,
+				D68D3A691FFB7FF90013D160 /* YGSampleTableViewController.h */,
+				D68D3A6A1FFB80070013D160 /* YGSampleTableViewController.m */,
+				D68D3A6D1FFB868D0013D160 /* YGFeedCell.h */,
+				D68D3A6C1FFB868D0013D160 /* YGFeedCell.m */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2532B1E31FEF7DB300CA3D50 /* README.md in Resources */,
+				D68D3A761FFB89F80013D160 /* data.json in Resources */,
 				2532B1C01FEF7D7700CA3D50 /* LaunchScreen.storyboard in Resources */,
 				2532B1BD1FEF7D7700CA3D50 /* Assets.xcassets in Resources */,
 				2532B1E11FEF7DB300CA3D50 /* LICENSE in Resources */,
@@ -212,11 +255,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D68D3A6E1FFB868D0013D160 /* YGFeedCell.m in Sources */,
 				2532B1E41FEF7DB300CA3D50 /* UIView+Yoga.m in Sources */,
 				2532B1B81FEF7D7700CA3D50 /* ViewController.m in Sources */,
 				D60419BF1FF0A77400D1478B /* YGSampleView.m in Sources */,
+				D68D3A741FFB877B0013D160 /* YGFeedEntity.m in Sources */,
 				2532B1EA1FEF7DB300CA3D50 /* YGNodeList.c in Sources */,
 				2532B1E91FEF7DB300CA3D50 /* YGEnums.c in Sources */,
+				D68D3A6B1FFB80070013D160 /* YGSampleTableViewController.m in Sources */,
 				2532B1C31FEF7D7700CA3D50 /* main.m in Sources */,
 				2532B1B51FEF7D7700CA3D50 /* AppDelegate.m in Sources */,
 				2532B1E51FEF7DB300CA3D50 /* YGLayout.m in Sources */,

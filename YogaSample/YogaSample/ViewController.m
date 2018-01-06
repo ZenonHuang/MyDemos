@@ -9,12 +9,20 @@
 #import "ViewController.h"
 #import "UIView+Yoga.h"
 #import "YGSampleView.h"
+#import "YGSampleTableViewController.h"
+
+typedef NS_ENUM(NSInteger,  YGSampleSectionType) {
+    YGSampleSectionTypeNormal,//普通视图
+    YGSampleSectionTypeList,//列表视图
+};
 
 static NSString *const tableViewIdentifier = @"tableViewIdentifier";
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,readwrite,strong) UITableView *tableView;
-@property (nonatomic,readwrite,copy  ) NSArray     *layoutList;
+@property (nonatomic,readwrite,copy  ) NSArray     *layoutSectionList;
+@property (nonatomic,readwrite,copy  ) NSArray     *layoutNormalList;
+@property (nonatomic,readwrite,copy  ) NSArray     *layoutTableList;
 @end
 
 @implementation ViewController
@@ -31,27 +39,39 @@ static NSString *const tableViewIdentifier = @"tableViewIdentifier";
 
 
 #pragma mark - delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.layoutSectionList.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return self.layoutList.count;
+    NSArray *list = self.layoutSectionList[section];
+    return list.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewIdentifier
                                                             forIndexPath:indexPath];
-    cell.textLabel.text = self.layoutList[indexPath.row];
+    NSArray *list = self.layoutSectionList[indexPath.section];
+    cell.textLabel.text = list[indexPath.row];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    YGSampleView *sampleView = [[YGSampleView alloc] initWithType:indexPath.row];
+    if (indexPath.section ==  YGSampleSectionTypeList) {
+        YGSampleTableViewController *tableVC = [[YGSampleTableViewController alloc] init];
+        [self.navigationController pushViewController:tableVC animated:YES];
+        return;
+    }
     
+    
+    YGSampleView *sampleView = [[YGSampleView alloc] initWithType:indexPath.row];
     UIViewController *vc = [UIViewController new];
     [vc.view addSubview:sampleView];
-
     [self.navigationController pushViewController:vc animated:YES];
+
+
 }
 
 #pragma mark - getter
@@ -69,11 +89,25 @@ static NSString *const tableViewIdentifier = @"tableViewIdentifier";
     return _tableView;
 }
 
-- (NSArray *)layoutList{
-    if (!_layoutList) {
-        _layoutList = @[@"居中布局",@"嵌套布局",@"等间距布局",@"等间距自动设宽",@"ScrollView排布设contentSize"];
+- (NSArray *)layoutSectionList{
+    if (!_layoutSectionList) {
+        _layoutSectionList = @[self.layoutNormalList,self.layoutTableList];
     }
-    return _layoutList;
+    return _layoutSectionList;
+}
+
+- (NSArray *)layoutNormalList{
+    if (!_layoutNormalList) {
+        _layoutNormalList = @[@"居中布局",@"嵌套布局",@"等间距布局",@"等间距自动设宽",@"ScrollView排布设contentSize"];
+    }
+    return _layoutNormalList;
+}
+
+- (NSArray *)layoutTableList{
+    if (!_layoutTableList) {
+        _layoutTableList = @[@"微博列表"];
+    }
+    return _layoutTableList;
 }
 
 @end

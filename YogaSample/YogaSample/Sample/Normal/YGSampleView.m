@@ -98,8 +98,9 @@
             [self.redView configureLayoutWithBlock:layoutBlock];
             [self.yellowView configureLayoutWithBlock:layoutBlock];
             
-            [self addSubview:self.redView];
+           
             [self addSubview:self.yellowView];
+            [self addSubview:self.redView];
             
             break;
         }
