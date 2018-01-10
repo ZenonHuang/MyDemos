@@ -13,6 +13,8 @@
 		259513EE200250A000B4AB79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 259513EC200250A000B4AB79 /* Main.storyboard */; };
 		259513F0200250A000B4AB79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 259513EF200250A000B4AB79 /* Assets.xcassets */; };
 		259513F3200250A000B4AB79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 259513F1200250A000B4AB79 /* LaunchScreen.storyboard */; };
+		D665777D20062AD300BB7DE1 /* tron_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = D665777C20062AD200BB7DE1 /* tron_grid.png */; };
+		D67FBF122006269300BD9CD3 /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67FBF112006269200BD9CD3 /* Plane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		259513EF200250A000B4AB79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		259513F2200250A000B4AB79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		259513F4200250A000B4AB79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D665777C20062AD200BB7DE1 /* tron_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tron_grid.png; sourceTree = "<group>"; };
+		D67FBF112006269200BD9CD3 /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		259513E5200250A000B4AB79 /* ARDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D665777C20062AD200BB7DE1 /* tron_grid.png */,
 				259513E6200250A000B4AB79 /* AppDelegate.swift */,
 				259513E8200250A000B4AB79 /* art.scnassets */,
 				259513EA200250A000B4AB79 /* ViewController.swift */,
@@ -63,6 +68,7 @@
 				259513EF200250A000B4AB79 /* Assets.xcassets */,
 				259513F1200250A000B4AB79 /* LaunchScreen.storyboard */,
 				259513F4200250A000B4AB79 /* Info.plist */,
+				D67FBF112006269200BD9CD3 /* Plane.swift */,
 			);
 			path = ARDemo;
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 				259513F3200250A000B4AB79 /* LaunchScreen.storyboard in Resources */,
 				259513F0200250A000B4AB79 /* Assets.xcassets in Resources */,
 				259513EE200250A000B4AB79 /* Main.storyboard in Resources */,
+				D665777D20062AD300BB7DE1 /* tron_grid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				259513EB200250A000B4AB79 /* ViewController.swift in Sources */,
+				D67FBF122006269300BD9CD3 /* Plane.swift in Sources */,
 				259513E7200250A000B4AB79 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

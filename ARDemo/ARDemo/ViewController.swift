@@ -14,32 +14,48 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    var planes = [UUID:Plane]() // 字典，存储场景中当前渲染的所有平面
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
+        
+        // 设置 ARSCNViewDelegate——此协议会提供回调来处理新创建的几何体
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
+        // 显示统计数据（statistics）如 fps 和 时长信息
         sceneView.showsStatistics = true
+        sceneView.autoenablesDefaultLighting = true
         
-        // Create a new scene,存放所有 3D 几何体的容器
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        // 开启 debug 选项以查看世界原点并渲染所有 ARKit 正在追踪的特征点
+        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
-        // Set the scene to the view
+        let scene = SCNScene()
         sceneView.scene = scene
         
-        /** 将10厘米的立方体放置在相机初始位置前20厘米处**/
-        // 想要绘制的 3D 立方体
-        let boxGeometry = SCNBox(width:0.1, height:0.1, length:0.1, chamferRadius:0)
-        // 将几何体包装为 node 以便添加到 scene
-        let cubeNode    = SCNNode(geometry:boxGeometry)
-        
-        cubeNode.position = SCNVector3(0,0, -0.2)
-        // rootNode 是一个特殊的 node，它是所有 node 的起始点
-        sceneView.scene.rootNode.addChildNode(cubeNode)
-        
-        sceneView.autoenablesDefaultLighting = true
+        // Set the view's delegate
+//        sceneView.delegate = self
+//
+//        // Show statistics such as fps and timing information
+//        sceneView.showsStatistics = true
+//
+//        // Create a new scene,存放所有 3D 几何体的容器
+//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//
+//        // Set the scene to the view
+//        sceneView.scene = scene
+//
+//        /** 将10厘米的立方体放置在相机初始位置前20厘米处**/
+//        // 想要绘制的 3D 立方体
+//        let boxGeometry = SCNBox(width:0.1, height:0.1, length:0.1, chamferRadius:0)
+//        // 将几何体包装为 node 以便添加到 scene
+//        let cubeNode    = SCNNode(geometry:boxGeometry)
+//
+//        cubeNode.position = SCNVector3(0,0, -0.2)
+//        // rootNode 是一个特殊的 node，它是所有 node 的起始点
+//        sceneView.scene.rootNode.addChildNode(cubeNode)
+//
+//        sceneView.autoenablesDefaultLighting = true
         
     
     }
@@ -47,13 +63,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // 创建 session configuration
-        let configuration = ARWorldTrackingConfiguration()
-        
-        configuration.planeDetection = .horizontal
-        
-        // 运行视图 Session
-        sceneView.session.run(configuration)
+        self.setupSession();
         
 
     }
@@ -85,25 +95,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //        sceneView.scene.rootNode.addChildNode(shipNode)
         
     }
+    //MARK: private
+    func setupSession() {
+        // 创建 session configuration
+        let configuration = ARWorldTrackingConfiguration()
+        
+        // 明确表示需要追踪水平面。设置后 scene 被检测到时就会调用 ARSCNViewDelegate 方法
+        configuration.planeDetection = .horizontal
+        
+        // 运行视图 Session
+        sceneView.session.run(configuration)
+    }
+
+    
+    
+    
     //MARK: - ARSCNViewDelegate
     
     
     //可以使用ARAnchor类来跟踪现实世界的位置，例如，当启用平面检测时，ARKit会为每个检测到的平面添加并更新锚点。
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else {
-            return 
+            return
         }
+//
+//        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
+//
+//        let planeNode = SCNNode(geometry: plane)
+//
+//        planeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
+//
+//        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
+//
+//        node.addChildNode(planeNode)
+
         
-        let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        
-        let planeNode = SCNNode(geometry: plane)
-        
-        planeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
-        
-        planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
-        
-        node.addChildNode(planeNode)
-     
+        // 检测到新平面时创建 SceneKit 平面以实现 3D 视觉化
+        let plane = Plane(withAnchor: planeAnchor)
+        planes[anchor.identifier] = plane
+        node.addChildNode(plane)
     }
     
     // Override to create and configure nodes for anchors added to the view's session.
@@ -115,7 +145,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
      return node
      }
      **/
-
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        
+        // 查看此平面当前是否正在渲染
+        guard let plane = planes[anchor.identifier] else {
+            return
+        }
+        
+        plane.update(anchor: anchor as! ARPlaneAnchor)
+    }
+    
+    /**
+     从 scene graph 中移除与给定 anchor 映射的 node 时调用。
+     
+     @param renderer 将会用于渲染 scene 的 renderer。
+     @param node 被移除的 node。
+     @param anchor 被移除的 anchor。
+     */
+    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        // 如果多个独立平面被发现共属某个大平面，此时会合并它们，并移除这些 node
+        planes.removeValue(forKey: anchor.identifier)
+    }
+    
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
