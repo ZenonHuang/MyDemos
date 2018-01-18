@@ -9,13 +9,13 @@
 #import "YGSampleTableViewController.h"
 #import "YGFeedCell.h"
 #import "UIView+Yoga.h"
+#import <objc/runtime.h>
 
 static NSString *kCellIdentifier = @"yg_kCellIdentifier";
 
 @interface YGSampleTableViewController ()
 @property (nonatomic,copy) NSArray *dataList;
 
-@property (nonatomic,strong) NSMutableArray *feedViewList;
 @property (nonatomic,strong) NSMutableArray *heightList;
 @end
 
@@ -51,24 +51,29 @@ static NSString *kCellIdentifier = @"yg_kCellIdentifier";
     }];
     self.dataList = entities;
     
-    //提前设置 feedView，计算高度
-    for (YGFeedEntity *obj in  self.dataList) {
-        YGFeedView *feedView = [[YGFeedView alloc] initWithData:obj];
-        [self.feedViewList addObject:feedView];
-    }
     
 }
 
 - (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath{
-    YGFeedView *feedView = self.feedViewList [indexPath.row];
-    return feedView.yoga.intrinsicSize.height;
+    
+    YGFeedCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+    
+    [cell prepareForReuse];
+    
+    YGFeedEntity *obj = self.dataList[indexPath.row];
+    [cell configureData:obj];
+    
+ 
+    
+    return cell.contentView.yoga.intrinsicSize.height;
 }
 
 - (UITableViewCell *)cellForIndexPath:(NSIndexPath *)indexPath{
     YGFeedCell *cell =[self.tableView dequeueReusableCellWithIdentifier:kCellIdentifier
                                                            forIndexPath:indexPath];
-    YGFeedView *feedView = self.feedViewList [indexPath.row];
-    [cell configureFeedView:feedView];
+
+    YGFeedEntity *obj = self.dataList[indexPath.row];
+    [cell configureData:obj];
    
     return cell;
 }
@@ -106,13 +111,6 @@ static NSString *kCellIdentifier = @"yg_kCellIdentifier";
         _dataList =[NSArray new];
     }
     return _dataList;
-}
-
-- (NSMutableArray *)feedViewList{
-    if (!_feedViewList) {
-        _feedViewList =[[NSMutableArray alloc] init];
-    }
-    return _feedViewList;
 }
 
 - (NSMutableArray *)heightList{

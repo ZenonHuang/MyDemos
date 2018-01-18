@@ -144,8 +144,8 @@
     return self;
 }
 
-- (void)configureFeedView:(YGFeedView *)feedView{
-
+- (void)configureData:(YGFeedEntity *)entity{
+    
     //delete old
     for (UIView *sub in self.contentView.subviews) {
         if ([sub isKindOfClass:[YGFeedView class]]) {
@@ -153,18 +153,13 @@
         }
     }
     
-    //setup new
-    if (feedView.superview) {
-        UIView *superView = feedView.superview;
-        [feedView removeFromSuperview];
-        //superview 重新计算，避免仍持有 feedview 布局
-        [superView.yoga applyLayoutPreservingOrigin:YES];
-    }
-
-
-    [self.contentView     addSubview:feedView];
-    [self.contentView.yoga applyLayoutPreservingOrigin:YES];
-
+//    //superview 重新计算，避免仍持有 feedview 布局
+//    [superView.yoga applyLayoutPreservingOrigin:YES];
+    
+    YGFeedView *feedView = [[YGFeedView alloc] initWithData:entity];
+    [self.contentView addSubview:feedView];
+    [self.contentView.yoga applyLayoutPreservingOrigin:YES]; 
+    
 }
 
 @end

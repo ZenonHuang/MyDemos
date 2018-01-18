@@ -15,5 +15,5 @@
 @end
 
 @interface YGFeedCell : UITableViewCell
-- (void)configureFeedView:(YGFeedView *)feedView;
+- (void)configureData:(YGFeedEntity *)entity;
 @end
