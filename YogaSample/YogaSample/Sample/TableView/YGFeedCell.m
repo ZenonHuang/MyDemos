@@ -76,17 +76,23 @@
     _titleLabel.yoga.marginLeft = 10;
     
     [_contentLabel configureLayoutWithBlock:marginWrapConfigureBlock];
+     _contentLabel.yoga.marginLeft = 10;
+    
     [_contentImageView configureLayoutWithBlock:marginWrapConfigureBlock];
+    _contentImageView.yoga.maxHeight = 150;
+    
 
     YGLayoutConfigurationBlock growWrapConfigureBlock  = ^(YGLayout *layout) {
         layout.isEnabled = YES;
         layout.flexGrow  = 1.0;
         layout.flexWrap  = YGWrapWrap;
-    } ; 
+    } ;
+    
     [_usernameLabel configureLayoutWithBlock:growWrapConfigureBlock];
-
+    _usernameLabel.yoga.marginLeft = 10;
+    
     [_timeLabel configureLayoutWithBlock:growWrapConfigureBlock];
-
+    _timeLabel.yoga.marginRight = 10;
 
     UIView *div = [[UIView alloc] init];
     [div configureLayoutWithBlock:^(YGLayout *layout) {
@@ -96,6 +102,7 @@
         layout.alignItems     = YGAlignCenter;
 
         layout.marginTop      = 10;
+        layout.marginBottom   = 10;
     }];
 
     [self addSubview:_titleLabel];
