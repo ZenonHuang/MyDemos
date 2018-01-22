@@ -9,49 +9,66 @@
 #import "YGFeedCell.h"
 #import "UIView+Yoga.h"
 
+@interface YGFeedView : UIView
 
-@interface YGFeedView ()
 @property (nonatomic, strong)  UILabel *titleLabel;
 @property (nonatomic, strong)  UILabel *contentLabel;
 @property (nonatomic, strong)  UIImageView *contentImageView;
 @property (nonatomic, strong)  UILabel *usernameLabel;
 @property (nonatomic, strong)  UILabel *timeLabel;
+@property (nonatomic, strong)  UIView  *bottomDiv;
 @end
 
 @implementation YGFeedView
 
-- (instancetype)initWithData:(YGFeedEntity *)entity{
-    if (self = [super init]) {
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        [self configData:entity];
-        [self layoutView];
+        
+         _titleLabel = [UILabel new];
+        
+        _contentLabel = [UILabel new];
+        _contentLabel.numberOfLines = 0;
+        
+        _contentImageView = [UIImageView new];
+        _contentImageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        
+        _usernameLabel = [UILabel new];
+        
+        _timeLabel = [UILabel new];
+        _timeLabel.textAlignment = NSTextAlignmentRight;
+        
+        [self addSubview:_titleLabel];
+        [self addSubview:_contentLabel];
+        [self addSubview:_contentImageView];
+        
+        self.bottomDiv = [[UIView alloc] init];
+  
+        [self.bottomDiv addSubview:_usernameLabel];
+        [self.bottomDiv addSubview:_timeLabel];
+        
+        [self addSubview:self.bottomDiv];
+        
+   
     }
     
     return self;
 }
 
 - (void)configData:(YGFeedEntity *)entity{
-    
-    _titleLabel = [UILabel new];
-    
-    _contentLabel = [UILabel new];
-    _contentLabel.numberOfLines = 0;
-    
-    _contentImageView = [UIImageView new];
-    _contentImageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    
-    _usernameLabel = [UILabel new];
-    
-    _timeLabel = [UILabel new];
-    _timeLabel.textAlignment = NSTextAlignmentRight;
-    
+
     _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:entity.title attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}];
     
     _contentLabel.attributedText = [[NSAttributedString alloc] initWithString:entity.content attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     
     if (entity.imageName.length>0) {
-          _contentImageView.image = [UIImage imageNamed:entity.imageName];
+        _contentImageView.yoga.display = YGDisplayFlex;
+        _contentImageView.image = [UIImage imageNamed:entity.imageName];
+    
+    }else{
+          _contentImageView.image = nil;
+        _contentImageView.yoga.display = YGDisplayNone;
     }
   
     
@@ -59,7 +76,8 @@
     
     _timeLabel.attributedText = [[NSAttributedString alloc] initWithString:entity.time attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
     
-
+    [self layoutView];
+    
 }
 
 - (void)layoutView {
@@ -79,8 +97,6 @@
      _contentLabel.yoga.marginLeft = 10;
     
     [_contentImageView configureLayoutWithBlock:marginWrapConfigureBlock];
-    _contentImageView.yoga.maxHeight = 150;
-    
 
     YGLayoutConfigurationBlock growWrapConfigureBlock  = ^(YGLayout *layout) {
         layout.isEnabled = YES;
@@ -94,25 +110,18 @@
     [_timeLabel configureLayoutWithBlock:growWrapConfigureBlock];
     _timeLabel.yoga.marginRight = 10;
 
-    UIView *div = [[UIView alloc] init];
-    [div configureLayoutWithBlock:^(YGLayout *layout) {
+   
+    
+    [self.bottomDiv configureLayoutWithBlock:^(YGLayout *layout) {
         layout.isEnabled      = YES;
         layout.flexDirection  = YGFlexDirectionRow;
         layout.justifyContent = YGJustifySpaceBetween;
         layout.alignItems     = YGAlignCenter;
-
+        
         layout.marginTop      = 10;
         layout.marginBottom   = 10;
     }];
-
-    [self addSubview:_titleLabel];
-    [self addSubview:_contentLabel];
-    [self addSubview:_contentImageView];
-
-    [div addSubview:_usernameLabel];
-    [div addSubview:_timeLabel];
-
-    [self addSubview:div];
+    
 
     [self configureLayoutWithBlock:^(YGLayout *layout) {
         layout.isEnabled     = YES;
@@ -128,7 +137,7 @@
 
 
 @interface YGFeedCell ()
-@property (nonatomic, strong)  UILabel *titleLabel;
+@property (nonatomic, strong) YGFeedView *feedView;
 @end
 
 
@@ -147,26 +156,40 @@
 //        layout.alignContent  = YGAlignCenter;
         layout.flexWrap      = YGWrapWrap;
     }];
-  
+    
+    [self.contentView addSubview:self.feedView];
+
+    [self.contentView.yoga applyLayoutPreservingOrigin:YES];
     return self;
 }
 
 - (void)configureData:(YGFeedEntity *)entity{
     
-    //delete old
-    for (UIView *sub in self.contentView.subviews) {
-        if ([sub isKindOfClass:[YGFeedView class]]) {
-            [sub removeFromSuperview];
-        }
-    }
-    
-//    //superview 重新计算，避免仍持有 feedview 布局
-//    [superView.yoga applyLayoutPreservingOrigin:YES];
-    
-    YGFeedView *feedView = [[YGFeedView alloc] initWithData:entity];
-    [self.contentView addSubview:feedView];
+    [self.feedView configData:entity];
+
     [self.contentView.yoga applyLayoutPreservingOrigin:YES]; 
     
 }
 
+- (YGFeedView *)feedView{
+    if (!_feedView) {
+        _feedView = [[YGFeedView alloc] init];
+    }
+    return _feedView;
+}
+
+@end
+
+@implementation  UITableView (TemplateCell)
+- (CGFloat)heightForData:(YGFeedEntity *)entity cellIdentifier:(NSString *)identifier{
+    
+    YGFeedCell *cell = [self dequeueReusableCellWithIdentifier:identifier];
+    
+    [cell prepareForReuse];
+    
+
+    [cell configureData:entity];
+    
+    return cell.contentView.yoga.intrinsicSize.height;
+}
 @end

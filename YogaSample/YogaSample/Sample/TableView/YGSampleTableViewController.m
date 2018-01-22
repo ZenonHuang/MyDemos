@@ -17,6 +17,7 @@ static NSString *kCellIdentifier = @"yg_kCellIdentifier";
 @property (nonatomic,copy) NSArray *dataList;
 
 @property (nonatomic,strong) NSMutableArray *heightList;
+
 @end
 
 @implementation YGSampleTableViewController
@@ -51,21 +52,6 @@ static NSString *kCellIdentifier = @"yg_kCellIdentifier";
     }];
     self.dataList = entities;
     
-    
-}
-
-- (CGFloat)heightForIndexPath:(NSIndexPath *)indexPath{
-    
-    YGFeedCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-    
-    [cell prepareForReuse];
-    
-    YGFeedEntity *obj = self.dataList[indexPath.row];
-    [cell configureData:obj];
-    
- 
-    
-    return cell.contentView.yoga.intrinsicSize.height;
 }
 
 - (UITableViewCell *)cellForIndexPath:(NSIndexPath *)indexPath{
@@ -85,13 +71,11 @@ static NSString *kCellIdentifier = @"yg_kCellIdentifier";
     return [self.dataList count];
 }
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [self heightForIndexPath:indexPath];
+    YGFeedEntity *obj = self.dataList[indexPath.row];
+    return [tableView heightForData:obj cellIdentifier:kCellIdentifier] ;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
         

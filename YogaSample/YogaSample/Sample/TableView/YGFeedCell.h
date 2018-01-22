@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "YGFeedEntity.h"
 
-
-@interface YGFeedView : UIView
-- (instancetype)initWithData:(YGFeedEntity *)entity;
-@end
-
 @interface YGFeedCell : UITableViewCell
 - (void)configureData:(YGFeedEntity *)entity;
+@end
+
+@interface UITableView (TemplateCell)
+- (CGFloat)heightForData:(YGFeedEntity *)entity cellIdentifier:(NSString *)identifier;
 @end
