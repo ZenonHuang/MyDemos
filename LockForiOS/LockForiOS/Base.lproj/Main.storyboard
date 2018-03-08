@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mm7-Yc-GgF">
+                                <rect key="frame" x="97.5" y="63" width="180" height="34"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="VUj-dV-JY2"/>
+                                    <constraint firstAttribute="width" constant="180" id="jM0-EY-mug"/>
+                                </constraints>
+                                <state key="normal" title="atomic多线程崩溃">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapAtomicCrash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EU4-23-QoF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXe-c9-mqf">
+                                <rect key="frame" x="97.5" y="117" width="180" height="34"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="RNa-dF-A4D"/>
+                                    <constraint firstAttribute="height" constant="34" id="lkY-tE-gvc"/>
+                                </constraints>
+                                <state key="normal" title="加锁--atomic">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapLockForAtomic:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h1O-Qu-F2X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzH-6K-kPw">
+                                <rect key="frame" x="98" y="226" width="179" height="33"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="YY6-2K-C3q"/>
+                                    <constraint firstAttribute="width" constant="179" id="rv2-Hd-FjK"/>
+                                </constraints>
+                                <state key="normal" title="@synchonized 递归访问">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapSynchonized:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bXe-XF-7e1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfi-EJ-BS4">
+                                <rect key="frame" x="59" y="175" width="257" height="33"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="7CI-Cn-9xi"/>
+                                    <constraint firstAttribute="height" constant="33" id="cDi-Ui-wVR"/>
+                                </constraints>
+                                <state key="normal" title="dispatch_semaphore 多线程并发">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapSemaphore:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Adv-AQ-XL5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpe-a2-m4U">
+                                <rect key="frame" x="124" y="278" width="127" height="29"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="818-lq-hc6"/>
+                                    <constraint firstAttribute="width" constant="127" id="ocQ-UB-DmY"/>
+                                </constraints>
+                                <state key="normal" title="mutex 递归死锁">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapMutexCrashForRecursion:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bXI-z6-pGn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tde-gK-zhV">
+                                <rect key="frame" x="79" y="315" width="216" height="35"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="216" id="Inl-Ua-ojS"/>
+                                    <constraint firstAttribute="height" constant="35" id="l71-2y-k3S"/>
+                                </constraints>
+                                <state key="normal" title="NSCondition 生产消费问题">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapCondition:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S6r-6c-WDB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iF-hQ-Qyv">
+                                <rect key="frame" x="72.5" y="370" width="230" height="35"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="PYf-lD-M9M"/>
+                                    <constraint firstAttribute="width" constant="230" id="bQf-zK-7WV"/>
+                                </constraints>
+                                <state key="normal" title="NSConditionLock 多任务依赖">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapConditionLock:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HC3-7r-XUU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tde-gK-zhV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AJ4-h0-TVh"/>
+                            <constraint firstItem="Lpe-a2-m4U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CTG-ol-mBX"/>
+                            <constraint firstItem="mzH-6K-kPw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RQT-ek-vrp"/>
+                            <constraint firstItem="mzH-6K-kPw" firstAttribute="top" secondItem="gfi-EJ-BS4" secondAttribute="bottom" constant="18" id="UYW-xh-QH3"/>
+                            <constraint firstItem="fXe-c9-mqf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VJZ-PD-q1D"/>
+                            <constraint firstItem="mm7-Yc-GgF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wbe-8f-oDU"/>
+                            <constraint firstItem="6iF-hQ-Qyv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="amg-Oq-sXn"/>
+                            <constraint firstItem="Lpe-a2-m4U" firstAttribute="top" secondItem="mzH-6K-kPw" secondAttribute="bottom" constant="19" id="ceW-lO-JQ6"/>
+                            <constraint firstItem="fXe-c9-mqf" firstAttribute="top" secondItem="mm7-Yc-GgF" secondAttribute="bottom" constant="20" id="hVH-id-WxQ"/>
+                            <constraint firstItem="mm7-Yc-GgF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="hdL-GZ-9by"/>
+                            <constraint firstItem="gfi-EJ-BS4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mVW-Gv-eOx"/>
+                            <constraint firstItem="gfi-EJ-BS4" firstAttribute="top" secondItem="fXe-c9-mqf" secondAttribute="bottom" constant="24" id="sQO-Ar-JZn"/>
+                            <constraint firstItem="tde-gK-zhV" firstAttribute="top" secondItem="Lpe-a2-m4U" secondAttribute="bottom" constant="8" id="vAU-wV-zQL"/>
+                            <constraint firstItem="6iF-hQ-Qyv" firstAttribute="top" secondItem="tde-gK-zhV" secondAttribute="bottom" constant="20" id="zow-YX-tHv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
+        </scene>
+    </scenes>
+</document>
