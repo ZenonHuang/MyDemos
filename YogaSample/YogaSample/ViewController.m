@@ -98,7 +98,7 @@ static NSString *const tableViewIdentifier = @"tableViewIdentifier";
 
 - (NSArray *)layoutNormalList{
     if (!_layoutNormalList) {
-        _layoutNormalList = @[@"居中布局",@"嵌套布局",@"等间距布局",@"等间距自动设宽",@"ScrollView排布设contentSize"];
+        _layoutNormalList = @[@"居中布局",@"嵌套布局",@"等间距布局",@"等间距自动设宽",@"ScrollView排布设contentSize",@"缩放动画"];
     }
     return _layoutNormalList;
 }
