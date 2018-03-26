@@ -61,6 +61,10 @@
             
             [self addSubview:self.redView];
             
+            
+            
+   
+            
             break;
         }
         case YGSampleTypeNested:
@@ -181,11 +185,27 @@
             }
             break;
         }
+        case YGSampleTypeCenterAnimation:{
+            [self setupType:YGSampleTypeCenter];
+            //动画
+            [UIView animateWithDuration:1 animations:^{
+                [self.redView configureLayoutWithBlock:^(YGLayout *layout) {
+                    layout.isEnabled = YES;
+                    layout.width=layout.height= 10;
+                    
+                }];
+                [self.yoga applyLayoutPreservingOrigin:YES];
+                [self layoutIfNeeded];
+            }];
+            break;
+        }
         default:
             break;
     }
     
     [self.yoga applyLayoutPreservingOrigin:YES];
+    
+
 }
 
 - (UIView *)createView:(UIColor *)color{

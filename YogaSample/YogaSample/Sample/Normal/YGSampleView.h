@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger,  YGSampleType) {
     YGSampleTypeSpaceBetween,//固定大小，等间距
     YGSampleTypeSpace,//等间距，自动设宽
     YGSampleTypeScrollView,
+    YGSampleTypeCenterAnimation,//居中缩小动画
 };
 
 @interface YGSampleView : UIView
