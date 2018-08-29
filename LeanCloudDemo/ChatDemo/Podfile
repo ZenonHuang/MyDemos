@@ -1,0 +1,12 @@
+
+platform :ios, '8.0'
+# ignoring warning from pods
+inhibit_all_warnings!
+target 'ChatDemo' do
+pod 'ChatKit'
+pod 'pop'
+pod 'TWMessageBarManager'
+pod 'DRDNetworking', '~> 0.6.1'
+pod 'YYCache', '~> 1.0.4'
+end
+
