@@ -1,0 +1,92 @@
+PODS:
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
+    - AFNetworking/NSURLSession
+  - AVOSCloud (3.4.0-beta.4)
+  - AVOSCloudIM (3.4.0-beta.4):
+    - AVOSCloud (= 3.4.0-beta.4)
+    - AVOSCloudIM/_ARC (= 3.4.0-beta.4)
+    - AVOSCloudIM/_NOARC (= 3.4.0-beta.4)
+  - AVOSCloudIM/_ARC (3.4.0-beta.4):
+    - AVOSCloud (= 3.4.0-beta.4)
+    - AVOSCloudIM/_NOARC (= 3.4.0-beta.4)
+  - AVOSCloudIM/_NOARC (3.4.0-beta.4):
+    - AVOSCloud (= 3.4.0-beta.4)
+  - ChatKit (0.7.12):
+    - AVOSCloud (~> 3.4.0-beta.4)
+    - AVOSCloudIM (~> 3.4.0-beta.4)
+    - DACircularProgress (~> 2.3.1)
+    - FDStackView (~> 1.0)
+    - FMDB (~> 2.6.2)
+    - Masonry (~> 1.0.1)
+    - MJRefresh (~> 3.1.9)
+    - MLLabel (~> 1.9.2)
+    - MWPhotoBrowser (~> 2.1.2)
+    - pop (~> 1.0.9)
+    - SDWebImage (~> 3.8.0)
+    - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
+  - DACircularProgress (2.3.1)
+  - DRDNetworking (0.6.1):
+    - AFNetworking (~> 3.0.0)
+  - FDStackView (1.0)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - Masonry (1.0.1)
+  - MBProgressHUD (0.9.2)
+  - MJRefresh (3.1.12)
+  - MLLabel (1.9.2)
+  - MWPhotoBrowser (2.1.2):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
+  - pop (1.0.9)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+  - TWMessageBarManager (1.8.1)
+  - UITableView+FDTemplateLayoutCell (1.5.beta)
+  - YYCache (1.0.4)
+
+DEPENDENCIES:
+  - ChatKit
+  - DRDNetworking (~> 0.6.1)
+  - pop
+  - TWMessageBarManager
+  - YYCache (~> 1.0.4)
+
+SPEC CHECKSUMS:
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  AVOSCloud: aacde3dcb0b35658cc72d0c04ec029b254dbf1e3
+  AVOSCloudIM: 4e91aa7068d367270338289ff4b8d1be6d278919
+  ChatKit: bbd50266cd91f46f36b3a99d8fff097b8c4984e2
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  DRDNetworking: ad88142e046e1577a539210a562aafae04aea41a
+  FDStackView: 3a4bbe0ce9c35e974246a585168b9da8c32213f1
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  MLLabel: df58127ce0bd1f87890ecc3232db77a85ce4cd97
+  MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  TWMessageBarManager: fd84e7948ba7968a2b5d9454859135761214ec56
+  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+
+PODFILE CHECKSUM: b328996a93608a3d079fc6ea5cfaf7243f150ade
+
+COCOAPODS: 1.0.0

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="oxC-hx-cag">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="mainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9e-9j-Cwg">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="123" id="Bnk-d1-RKO"/>
+                                </constraints>
+                                <state key="normal" title="最近联系列表"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Bnk-d1-RKO"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Bnk-d1-RKO"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="touchConversionBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7tR-rd-RFX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCN-DE-fnD">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="联系人列表"/>
+                                <connections>
+                                    <action selector="touchContactBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="coh-Gq-2oG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bnp-Fa-lYf">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="BsP-uF-dcd"/>
+                                </constraints>
+                                <state key="normal" title="LCChatKit群聊"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BsP-uF-dcd"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="BsP-uF-dcd"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="touchChatKitButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jhr-Gp-KHk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gCN-DE-fnD" firstAttribute="top" secondItem="X9e-9j-Cwg" secondAttribute="bottom" constant="20" id="22o-CB-La0"/>
+                            <constraint firstItem="X9e-9j-Cwg" firstAttribute="trailing" secondItem="gCN-DE-fnD" secondAttribute="trailing" id="CZc-zz-PhA"/>
+                            <constraint firstItem="X9e-9j-Cwg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lye-h2-QQv"/>
+                            <constraint firstItem="gCN-DE-fnD" firstAttribute="centerX" secondItem="bnp-Fa-lYf" secondAttribute="centerX" id="R4A-Wd-lgw"/>
+                            <constraint firstItem="X9e-9j-Cwg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="145" id="XWo-Fd-s39"/>
+                            <constraint firstItem="bnp-Fa-lYf" firstAttribute="top" secondItem="gCN-DE-fnD" secondAttribute="bottom" constant="20" id="m0z-cC-j3G"/>
+                            <constraint firstItem="X9e-9j-Cwg" firstAttribute="leading" secondItem="gCN-DE-fnD" secondAttribute="leading" id="nuV-z1-nZe"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="X9e-9j-Cwg"/>
+                                <exclude reference="gCN-DE-fnD"/>
+                                <exclude reference="bnp-Fa-lYf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="CZc-zz-PhA"/>
+                                <exclude reference="Lye-h2-QQv"/>
+                                <exclude reference="XWo-Fd-s39"/>
+                                <exclude reference="nuV-z1-nZe"/>
+                                <exclude reference="m0z-cC-j3G"/>
+                                <exclude reference="22o-CB-La0"/>
+                                <exclude reference="R4A-Wd-lgw"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="X9e-9j-Cwg"/>
+                                <include reference="gCN-DE-fnD"/>
+                                <include reference="bnp-Fa-lYf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="CZc-zz-PhA"/>
+                                <include reference="Lye-h2-QQv"/>
+                                <include reference="XWo-Fd-s39"/>
+                                <include reference="nuV-z1-nZe"/>
+                                <include reference="m0z-cC-j3G"/>
+                                <include reference="22o-CB-La0"/>
+                                <include reference="R4A-Wd-lgw"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="wDE-WQ-oEp"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1360.5" y="502"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fuc-b8-hWR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oxC-hx-cag" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w0L-Of-4Hi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tDL-IK-hpj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lCP-pG-0wX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="442.5" y="502"/>
+        </scene>
+    </scenes>
+</document>
