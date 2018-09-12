@@ -14,6 +14,7 @@
 		D6B346112140D94500167DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B3460F2140D94500167DF0 /* LaunchScreen.storyboard */; };
 		D6B346142140D94500167DF0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B346132140D94500167DF0 /* main.m */; };
 		D6B3461C2140D9B800167DF0 /* NSObject+Throttle.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B3461A2140D9B800167DF0 /* NSObject+Throttle.m */; };
+		D6B6D6AC2148EE1F000F6200 /* NSObject+Debounce.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B6D6AB2148EE1F000F6200 /* NSObject+Debounce.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		D6B346132140D94500167DF0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6B3461A2140D9B800167DF0 /* NSObject+Throttle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Throttle.m"; sourceTree = "<group>"; };
 		D6B3461B2140D9B800167DF0 /* NSObject+Throttle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Throttle.h"; sourceTree = "<group>"; };
+		D6B6D6AA2148EE13000F6200 /* NSObject+Debounce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Debounce.h"; sourceTree = "<group>"; };
+		D6B6D6AB2148EE1F000F6200 /* NSObject+Debounce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Debounce.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				D6B3460F2140D94500167DF0 /* LaunchScreen.storyboard */,
 				D6B346122140D94500167DF0 /* Info.plist */,
 				D6B346132140D94500167DF0 /* main.m */,
+				D6B6D6AA2148EE13000F6200 /* NSObject+Debounce.h */,
+				D6B6D6AB2148EE1F000F6200 /* NSObject+Debounce.m */,
 			);
 			path = Throttle;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6B6D6AC2148EE1F000F6200 /* NSObject+Debounce.m in Sources */,
 				D6B346092140D94300167DF0 /* ViewController.m in Sources */,
 				D6B346142140D94500167DF0 /* main.m in Sources */,
 				D6B346062140D94300167DF0 /* AppDelegate.m in Sources */,
