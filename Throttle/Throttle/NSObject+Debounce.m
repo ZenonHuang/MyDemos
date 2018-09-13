@@ -28,11 +28,11 @@ static char HZDebounceSerialQueue;
         objc_setAssociatedObject(self, &HZDebounceSelectorKey, operationSelectors, OBJC_ASSOCIATION_COPY_NONATOMIC);
     }
     
-    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self
-                                                                     selector:NSSelectorFromString(debounceObj.aSelector)
-                                                                       object:nil];
-    debounceObj.lastOperation = op;
-    
+//    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self
+//                                                                     selector:NSSelectorFromString(debounceObj.aSelector)
+//                                                                       object:nil];
+//    debounceObj.lastOperation = op;
+    NSInvocationOperation *op = debounceObj.lastOperation;
     
     NSString *selectorName    = debounceObj.aSelector;
     if (![operationSelectors objectForKey:selectorName]) {//不存在 selector 的操作队列，为第一次进入
@@ -55,6 +55,7 @@ static char HZDebounceSerialQueue;
                 debounceObj.lastOperation=nil;
                 if ([operationSelectors objectForKey:selectorName]) {
                     [operationSelectors removeObjectForKey:selectorName];
+                    objc_setAssociatedObject(self, &HZDebounceSelectorKey, operationSelectors, OBJC_ASSOCIATION_COPY_NONATOMIC);
                 }
                 
             }else{
