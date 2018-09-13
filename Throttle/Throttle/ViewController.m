@@ -8,9 +8,11 @@
 
 #import "ViewController.h"
 #import "NSObject+Throttle.h"
+#import "NSObject+Debounce.h"
 
 @interface ViewController ()
 @property (nonatomic,strong) UIAlertController *alertVC;
+@property (nonatomic,strong) Debounce          *debounce;
 @end
 
 @implementation ViewController
@@ -18,7 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-   
+    self.debounce = [[Debounce alloc] init];
+    self.debounce.aSelector = NSStringFromSelector(@selector(show));
+    self.debounce.inteval   = 8;
+    
 }
 
 
@@ -35,9 +40,14 @@
 #pragma mark - action
 
 - (IBAction)tapButton:(id)sender {
-    
+    NSLog(@"点击 Throttle");
     [self hz_performSelector:@selector(show)
                 withThrottle:10];
+}
+
+- (IBAction)tapDebouceButton:(id)sender {
+    NSLog(@"点击 Debouce");
+    [self hz_performWithDebounce:self.debounce];
 }
 
 #pragma mark - getter

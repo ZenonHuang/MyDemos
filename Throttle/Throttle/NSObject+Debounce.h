@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+
+@interface Debounce : NSObject
+@property (nonatomic) NSString *aSelector;
+//@property (nonatomic,strong) NSString *aClassName;
+@property (nonatomic,assign) NSTimeInterval inteval;
+@property (nonatomic,strong) NSInvocationOperation *lastOperation;
+@end
+
 @interface NSObject (Debounce)
 
-- (void)hz_performSelector:(SEL)aSelector withDebounce:(NSTimeInterval)inteval;
+- (void)hz_performWithDebounce:(Debounce *)debounceObj;
 
 @end
