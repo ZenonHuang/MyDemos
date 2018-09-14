@@ -10,8 +10,7 @@
 
 
 @interface Debounce : NSObject
-@property (nonatomic) NSString *aSelector;
-//@property (nonatomic,strong) NSString *aClassName;
+@property (nonatomic,copy  ) NSString *aSelector;
 @property (nonatomic,assign) NSTimeInterval inteval;
 @property (nonatomic,strong) NSInvocationOperation *lastOperation;
 @end
