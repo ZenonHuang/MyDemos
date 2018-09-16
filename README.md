@@ -60,6 +60,7 @@ NestedScrollView | 嵌套 ScrollView 滑动               |  2018/09/08
  MaskDemo        | mask效果 | 2016/10/14
  PulsingHalo     | 光圈效果  | 2016/10/15
  TransitionDemo  | 转场效果  | 2016/10/18
+ ElasticAnimation | 橡皮筋动画，学习自  raywenderlich | 2017/08/01
 
 
 
