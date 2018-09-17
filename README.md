@@ -14,6 +14,7 @@
 doubleTapDemo | 双击tabBar刷新原理（双击判断，双击间隔）  |  2016/10/14
 ChristmasTree  | Swift 脚本输出圣诞树🎄               |  2016/12/25
 DragDropCollectionView | cell 晃动拖拽编辑效果         | 2017/01/18
+HZRangeSlider| 双头滑杆，选择数值范围                  | 2017/05/05
 HZGaugeView  | 绘制仪表盘。                            | 2017/06/28
 ARDemo | ARKit 模型使用，立方体放置                     |  2018/01/07
 CopyLabel | 文本复制功能的 label                       |  2018/09/10
