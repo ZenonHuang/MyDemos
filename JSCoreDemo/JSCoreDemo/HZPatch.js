@@ -1,6 +1,5 @@
-var global = this
-
-;(function() {
+var global = this;
+(function() {
 
   var _ocCls = {};
   var _jsCls = {};

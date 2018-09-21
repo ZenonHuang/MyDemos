@@ -33,9 +33,9 @@ static void (^_exceptionBlock)(NSString *log) = ^void(NSString *log) {
         return;
     }
     
+    //1.对 OC 的方法进行定义
     JSContext *context = [[JSContext alloc] init];
     
-
     context[@"_OC_defineClass"] = ^(NSString *classDeclaration, JSValue *instanceMethods, JSValue *classMethods) {
         return defineClass(classDeclaration, instanceMethods, classMethods);
     };
@@ -43,9 +43,7 @@ static void (^_exceptionBlock)(NSString *log) = ^void(NSString *log) {
     
     _context = context;
     
-
-
-    
+    //2.执行 JS
     NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"HZPatch" ofType:@"js"];
     if (!path) _exceptionBlock(@"can't find HZPatch.js");
     NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
