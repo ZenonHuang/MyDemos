@@ -1,8 +1,14 @@
 #!/bin/bash
 
-Branch=$1
-#使用命令为: auto_proto.sh develop
+if [ ! -n "$1" ] ;then
+echo "--- ❌ 分支名没有输入，需要重传 ----"
+echo "示例: auto_proto.sh develop"
+exit
+else
 echo "--- 分支名为: ${Branch},没有则需要重传 ----"
+fi
+
+Branch=$1
 
 RepoPath=ssh://xxx.git
 
