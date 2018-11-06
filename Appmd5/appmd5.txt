@@ -1,0 +1,36 @@
+MD5 (XHX.ipa) = a5ae592e2e6c562b0f126304674d1ff3
+
+
+- (void)checkVersion:(void(^)(BaseURLType urlType))resultBlock
+{
+    //1.读取本地标量，YES 则发送请求， NO 则不发送
+    NSString *reqUpdateKey = @"reqUpdateKey";
+    id reqUpdateValue = [SettingsData.sharedObject getValueForKey:reqUpdateKey];
+    if(!reqUpdateValue){
+        [SettingsData.sharedObject setValue:[NSNumber numberWithBool:YES] forKey:reqUpdateKey];
+    }
+    
+    BOOL reqUpdate = [[SettingsData.sharedObject getValueForKey:reqUpdateKey] boolValue];
+    if(!reqUpdate){
+        !resultBlock ? :resultBlock(BaseURLTypeZhengShi);
+        return;
+    }
+    
+    //2.如果要请求，则向服务器查询
+    OSConfigReq *req = [OSConfigReq new];
+    req.osType = @"";
+    req.reqVersion = @"";
+    WFDataCenterRequest* request = [WFDataCenterRequest wupRequestWithReq:req
+                                                              servantName:@"breath.conf.ConfExtObj"
+                                                                 funcName:@"GetConf"
+                                                                 rspClass:[OSConfigRes class]];
+    request.cacheKey = [NSString stringWithFormat:@"%@",request.func];
+    request.cmdid = PROTOOperationType_OpSendSms;
+    request.channelSelect = ChannelType_ShortConn;
+   
+ 
+
+    
+    
+    
+}
