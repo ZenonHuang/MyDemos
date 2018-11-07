@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tde-gK-zhV">
-                                <rect key="frame" x="79" y="315" width="216" height="35"/>
+                                <rect key="frame" x="79.5" y="315" width="216" height="35"/>
                                 <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="216" id="Inl-Ua-ojS"/>
@@ -116,17 +116,33 @@
                                     <action selector="tapConditionLock:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HC3-7r-XUU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOf-5Y-8Do">
+                                <rect key="frame" x="112.5" y="423" width="150" height="29"/>
+                                <color key="backgroundColor" red="0.36768999899999999" green="0.36233756859999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="KR6-EH-JeV"/>
+                                    <constraint firstAttribute="height" constant="29" id="vWI-oO-Y11"/>
+                                </constraints>
+                                <state key="normal" title="解决 mutex 递归死锁">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapSolveMutexCrashForRecursion:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hX7-5f-Vsd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tde-gK-zhV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AJ4-h0-TVh"/>
                             <constraint firstItem="Lpe-a2-m4U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CTG-ol-mBX"/>
+                            <constraint firstItem="iOf-5Y-8Do" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PNn-gF-jXR"/>
                             <constraint firstItem="mzH-6K-kPw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RQT-ek-vrp"/>
                             <constraint firstItem="mzH-6K-kPw" firstAttribute="top" secondItem="gfi-EJ-BS4" secondAttribute="bottom" constant="18" id="UYW-xh-QH3"/>
                             <constraint firstItem="fXe-c9-mqf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VJZ-PD-q1D"/>
                             <constraint firstItem="mm7-Yc-GgF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wbe-8f-oDU"/>
                             <constraint firstItem="6iF-hQ-Qyv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="amg-Oq-sXn"/>
                             <constraint firstItem="Lpe-a2-m4U" firstAttribute="top" secondItem="mzH-6K-kPw" secondAttribute="bottom" constant="19" id="ceW-lO-JQ6"/>
+                            <constraint firstItem="iOf-5Y-8Do" firstAttribute="top" secondItem="6iF-hQ-Qyv" secondAttribute="bottom" constant="18" id="gED-ap-AuL"/>
                             <constraint firstItem="fXe-c9-mqf" firstAttribute="top" secondItem="mm7-Yc-GgF" secondAttribute="bottom" constant="20" id="hVH-id-WxQ"/>
                             <constraint firstItem="mm7-Yc-GgF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="hdL-GZ-9by"/>
                             <constraint firstItem="gfi-EJ-BS4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mVW-Gv-eOx"/>

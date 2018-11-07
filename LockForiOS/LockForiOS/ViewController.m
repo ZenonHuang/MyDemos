@@ -13,6 +13,7 @@
 @property (nonatomic,assign) NSUInteger count;
 
 @property (strong, nonatomic) NSCondition *condition;
+@property (strong, nonatomic) NSThread    *lockThread;
 @end
 
 @implementation ViewController
@@ -125,6 +126,14 @@
     NSLock *lock = [[NSLock alloc] init];
     [self testRecursionForMutex:lock];
 }
+//解决 mutex 递归死锁的一种思路
+- (IBAction)tapSolveMutexCrashForRecursion:(id)sender {
+    
+    self.count = 1000;
+    
+    NSLock *lock = [[NSLock alloc] init];
+    [self solveRecursionForMutex:lock];
+}
 
 //@Synchonized
 - (void)testRecursionForSynchonized:(id)obj{
@@ -145,6 +154,24 @@
         self.count = self.count - 1;
         [self testRecursionForMutex:lock];
         [lock unlock];
+    }
+}
+
+- (void)solveRecursionForMutex:(NSLock *)lock{
+    if(self.count>0){
+        NSLog(@"count:%zd \n", self.count);
+        if (self.lockThread==[NSThread currentThread]) {
+            self.count = self.count - 1;
+            [self solveRecursionForMutex:lock];
+        }else{
+            [lock lock];
+            self.lockThread = [NSThread currentThread];
+            self.count = self.count - 1;
+            [self solveRecursionForMutex:lock];
+            self.lockThread = nil;
+            [lock unlock];
+        }
+        
     }
 }
 
