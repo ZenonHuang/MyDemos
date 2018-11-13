@@ -19,14 +19,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self.view addSubview:self.chatInputView];
-
 }
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [self.view addSubview:self.chatInputView];
+}
+
 
 #pragma mark - getter
 - (HZChatInputView *)chatInputView{
     if (!_chatInputView) {
-        _chatInputView = [[HZChatInputView alloc] init];
+        _chatInputView = [HZChatInputView addInputView:self.view];
+        _chatInputView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _chatInputView.textViewBackgroundColor = [UIColor whiteColor];
+        _chatInputView.inputTextFont = [UIFont italicSystemFontOfSize:18];
+        _chatInputView.maxTextHeight = 200;
+        _chatInputView.placeholderText = @"input some..";
+        _chatInputView.sendButtonNormalColor = [UIColor orangeColor];
+        _chatInputView.sendButtonDisableColor = [UIColor grayColor];
     }
     return _chatInputView;    
 }
