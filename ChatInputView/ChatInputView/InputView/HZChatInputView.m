@@ -53,6 +53,14 @@
                                              selector:@selector(textDidChange:)
                                                  name:UITextViewTextDidChangeNotification
                                                object:self.textView];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShowNotification:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHideNotification:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
     
     return self;
 }
@@ -61,6 +69,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 
 #pragma mark - override
 -(CGSize)sizeThatFits:(CGSize)size
@@ -173,11 +182,15 @@
 
 #pragma mark - action
 - (void)tapImageButton:(UIButton *)sender{
-    
+    if ([self.delegate respondsToSelector:@selector(hz_chatInputView:tapImageButton:)]) {
+        [self.delegate hz_chatInputView:self tapImageButton:sender];
+    }
 }
 
 - (void)tapSendButton:(UIButton *)sender{
-#warning todo 发送回调要带上 text
+    if ([self.delegate respondsToSelector:@selector(hz_chatInputView:sendText:)]) {
+        [self.delegate hz_chatInputView:self sendText:self.textView.text];
+    }
 }
 
 #pragma mark  notification
@@ -210,6 +223,23 @@
 
             self.heightConstraint.constant = textSize.height+(10*2) + self.inputViewBottom  ;
         }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(hz_chatInputView:textChange:)]) {
+        [self.delegate hz_chatInputView:self textChange:textView.text];
+    }
+    
+}
+
+- (void)keyboardWillShowNotification:(NSNotification *)notification{
+    if ([self.delegate respondsToSelector:@selector(hz_chatInputView:keyboardWillShow:)]) {
+        [self.delegate hz_chatInputView:self keyboardWillShow:notification.userInfo];
+    }
+}
+
+- (void)keyboardWillHideNotification:(NSNotification *)notification{
+    if ([self.delegate respondsToSelector:@selector(hz_chatInputView:keyboardWillHide:)]) {
+        [self.delegate hz_chatInputView:self keyboardWillHide:notification.userInfo];
     }
 }
 

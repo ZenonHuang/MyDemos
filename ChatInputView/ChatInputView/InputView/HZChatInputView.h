@@ -8,7 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class HZChatInputView;
+
+@protocol HZChatInputViewDelegate <NSObject>
+
+@optional
+- (void)hz_chatInputView:(HZChatInputView *)chatInputView keyboardWillShow:(NSDictionary *)userInfo;
+- (void)hz_chatInputView:(HZChatInputView *)chatInputView keyboardWillHide:(NSDictionary *)userInfo;
+- (void)hz_chatInputView:(HZChatInputView *)chatInputView textChange:(NSString *)text;
+@required
+- (void)hz_chatInputView:(HZChatInputView *)chatInputView sendText:(NSString *)text;
+- (void)hz_chatInputView:(HZChatInputView *)chatInputView tapImageButton:(UIButton *)button;
+@end
+
 @interface HZChatInputView : UIView
+@property (nonatomic,weak) id<HZChatInputViewDelegate> delegate;
 ///textView 的最大高
 @property (nonatomic,assign) int maxTextHeight;
 

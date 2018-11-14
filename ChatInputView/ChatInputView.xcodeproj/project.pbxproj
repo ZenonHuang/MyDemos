@@ -14,9 +14,11 @@
 		250DAABC21940F3E00CB47B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250DAABA21940F3E00CB47B1 /* LaunchScreen.storyboard */; };
 		250DAABF21940F3E00CB47B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 250DAABE21940F3E00CB47B1 /* main.m */; };
 		250DAAC721940F6400CB47B1 /* HZChatInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 250DAAC621940F6400CB47B1 /* HZChatInputView.m */; };
+		9E24E882D481727212262FDA /* libPods-ChatInputView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21C5E9CE22E5BB84612A6665 /* libPods-ChatInputView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21C5E9CE22E5BB84612A6665 /* libPods-ChatInputView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ChatInputView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		250DAAAC21940F3D00CB47B1 /* ChatInputView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatInputView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250DAAAF21940F3D00CB47B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		250DAAB021940F3D00CB47B1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,6 +31,8 @@
 		250DAABE21940F3E00CB47B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		250DAAC521940F5500CB47B1 /* HZChatInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZChatInputView.h; sourceTree = "<group>"; };
 		250DAAC621940F6400CB47B1 /* HZChatInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZChatInputView.m; sourceTree = "<group>"; };
+		378559D9D350CE4256809630 /* Pods-ChatInputView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatInputView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatInputView/Pods-ChatInputView.debug.xcconfig"; sourceTree = "<group>"; };
+		EBD1FAB14C766F2B109C46B0 /* Pods-ChatInputView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatInputView.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatInputView/Pods-ChatInputView.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,17 +40,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E24E882D481727212262FDA /* libPods-ChatInputView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0123DA83B5332BE8BA1F1D52 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				378559D9D350CE4256809630 /* Pods-ChatInputView.debug.xcconfig */,
+				EBD1FAB14C766F2B109C46B0 /* Pods-ChatInputView.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		250DAAA321940F3D00CB47B1 = {
 			isa = PBXGroup;
 			children = (
 				250DAAAE21940F3D00CB47B1 /* ChatInputView */,
 				250DAAAD21940F3D00CB47B1 /* Products */,
+				0123DA83B5332BE8BA1F1D52 /* Pods */,
+				8957DA4942B61779253F8F76 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +100,14 @@
 			path = InputView;
 			sourceTree = "<group>";
 		};
+		8957DA4942B61779253F8F76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21C5E9CE22E5BB84612A6665 /* libPods-ChatInputView.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 250DAAC221940F3E00CB47B1 /* Build configuration list for PBXNativeTarget "ChatInputView" */;
 			buildPhases = (
+				0CFA3A460D36EC83CEB75B1A /* [CP] Check Pods Manifest.lock */,
 				250DAAA821940F3D00CB47B1 /* Sources */,
 				250DAAA921940F3D00CB47B1 /* Frameworks */,
 				250DAAAA21940F3D00CB47B1 /* Resources */,
+				DFD7CE111BBA06949D8665B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +174,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CFA3A460D36EC83CEB75B1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChatInputView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFD7CE111BBA06949D8665B5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ChatInputView/Pods-ChatInputView-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChatInputView/Pods-ChatInputView-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		250DAAA821940F3D00CB47B1 /* Sources */ = {
@@ -297,6 +370,7 @@
 		};
 		250DAAC321940F3E00CB47B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 378559D9D350CE4256809630 /* Pods-ChatInputView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -314,6 +388,7 @@
 		};
 		250DAAC421940F3E00CB47B1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBD1FAB14C766F2B109C46B0 /* Pods-ChatInputView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
