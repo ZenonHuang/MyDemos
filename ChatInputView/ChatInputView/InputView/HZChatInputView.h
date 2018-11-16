@@ -22,20 +22,23 @@
 @end
 
 @interface HZChatInputView : UIView
-@property (nonatomic,weak) id<HZChatInputViewDelegate> delegate;
-///textView 的最大高
+//TextView
 @property (nonatomic,assign) int maxTextHeight;
-
 @property (nonatomic,copy)   NSString  *text;
+@property (nonatomic,assign) UIEdgeInsets textInsets;
+@property (nonatomic,assign) CGFloat   textViewCornerRadius;
 @property (nonatomic,strong) UIColor   *textViewBackgroundColor;
 @property (nonatomic,strong) UIFont    *inputTextFont;
-
+@property (nonatomic,copy)   NSString  *placeholderText;
+@property (nonatomic,strong) UIColor   *placeholderColor;
+//sendbutton
 @property (nonatomic,strong) UIColor    *sendButtonNormalColor;
 @property (nonatomic,strong) UIColor    *sendButtonDisableColor;
+@property (nonatomic,assign) CGFloat    sendButtonCornerRadius;
 
-@property (nonatomic,copy) NSString *placeholderText;
+@property (nonatomic,weak) id<HZChatInputViewDelegate> delegate;
 
-+ (HZChatInputView *)addInputView:(UIView *)chatView;
++ (HZChatInputView *)addFromChatView:(UIView *)chatView;
 
 @end
 

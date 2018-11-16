@@ -7,7 +7,7 @@
 //
 #import "HZChatInputView.h"
 
-@interface HZChatInputView ()
+@interface HZChatInputView ()<UITextViewDelegate>
 ///整个 input 的最小高
 @property (nonatomic,assign) int minHeight;
 
@@ -81,7 +81,7 @@
 }
 
 #pragma mark - public
-+ (HZChatInputView *)addInputView:(UIView *)chatView{
++ (HZChatInputView *)addFromChatView:(UIView *)chatView{
     HZChatInputView *chatInputView = [[HZChatInputView alloc] init];
     [chatView addSubview:chatInputView];
     
@@ -180,6 +180,15 @@
     [self  addConstraint:widthConstraint];
 }
 
+#pragma mark - delegate
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        [self tapSendButton:nil];
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - action
 - (void)tapImageButton:(UIButton *)sender{
     if ([self.delegate respondsToSelector:@selector(hz_chatInputView:tapImageButton:)]) {
@@ -250,6 +259,19 @@
     return self.textView.text;
 }
 
+- (UITextView *)textView{
+    if (!_textView) {
+        _textView = [[UITextView alloc] init];
+        _textView.backgroundColor = [UIColor grayColor];//#F7F7F7
+        _textView.font       = self.inputTextFont;
+        _textView.textContainerInset = UIEdgeInsetsMake(7, 15, 7, 15);
+        _textView.returnKeyType = UIReturnKeySend ;
+        _textView.delegate = self;
+    }
+    
+    return _textView;
+}
+
 - (UIFont *)inputTextFont{
     if(!_inputTextFont) {
         _inputTextFont =  [UIFont fontWithName:@"PingFang-SC-Regular" size:15];
@@ -267,16 +289,6 @@
     return _placeholderLabel;
 }
 
-- (UITextView *)textView{
-    if (!_textView) {
-        _textView = [[UITextView alloc] init];
-        _textView.backgroundColor = [UIColor grayColor];//#F7F7F7
-        _textView.font       = self.inputTextFont;
-        _textView.textContainerInset = UIEdgeInsetsMake(7, 15, 7, 15);
-    }
-    
-    return _textView;
-}
 
 - (UIButton *)sendButton{
     if (!_sendButton) {
@@ -333,11 +345,27 @@
     self.placeholderLabel.font = self.textView.font = inputTextFont;
 }
 
+- (void)setTextInsets:(UIEdgeInsets)textInsets{
+    self.textView.textContainerInset = textInsets;
+}
+
+- (void)setTextViewCornerRadius:(CGFloat)textViewCornerRadius{
+    self.textView.layer.cornerRadius = textViewCornerRadius;
+}
+
+- (void)setSendButtonCornerRadius:(CGFloat)sendButtonCornerRadius{
+    self.sendButton.layer.cornerRadius = sendButtonCornerRadius;
+}
+
 - (void)setPlaceholderText:(NSString *)placeholderText{
     _placeholderText = placeholderText;
     self.placeholderLabel.text = placeholderText;
 }
 
+- (void)setPlaceholderColor:(UIColor *)placeholderColor{
+    _placeholderColor = placeholderColor;
+    self.placeholderLabel.textColor = placeholderColor;
+}
 - (void)setText:(NSString *)text{
     self.textView.text = text;
 }
