@@ -24,7 +24,9 @@
 @interface HZChatInputView : UIView
 //TextView
 @property (nonatomic,assign) int maxTextHeight;
-@property (nonatomic,copy)   NSString  *text;
+@property (nonatomic,assign) CGFloat minHeight;
+@property (nonatomic,assign) CGFloat verticalSpace;//textview 垂直方向间隔
+@property (nonatomic,copy)   NSString *text;
 @property (nonatomic,assign) UIEdgeInsets textInsets;
 @property (nonatomic,assign) CGFloat   textViewCornerRadius;
 @property (nonatomic,strong) UIColor   *textViewBackgroundColor;

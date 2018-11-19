@@ -9,13 +9,10 @@
 
 @interface HZChatInputView ()<UITextViewDelegate>
 ///整个 input 的最小高
-@property (nonatomic,assign) int minHeight;
-
+//@property (nonatomic,assign) int minHeight;
 @property (nonatomic,strong) UITextView *textView;
 @property (nonatomic,strong) UILabel    *placeholderLabel;
 @property (nonatomic,strong) UIButton   *sendButton;
-
-
 @property (nonatomic,strong) UIButton   *imageButton;
 
 @property (nonatomic,strong) NSLayoutConstraint *heightConstraint;
@@ -37,7 +34,8 @@
         return nil;
     }
     self.backgroundColor = [UIColor whiteColor];
-    self.minHeight     = (10*2)+35;
+    self.verticalSpace = 10;
+    self.minHeight     = (self.verticalSpace*2)+35;
     self.maxTextHeight = 80;
     
     [self addSubview:self.sendButton];
@@ -47,7 +45,6 @@
         [self.textView addSubview:self.imageButton];
     }
   
-    [self setupLayout];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textDidChange:)
@@ -63,6 +60,12 @@
                                                object:nil];
     
     return self;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self setupLayout];
 }
 
 - (void)dealloc
@@ -93,7 +96,7 @@
 #pragma mark - private
 - (void)setupLayout{
     CGFloat viewHeigt = self.frame.size.height;
-    CGFloat textHeight  = ( viewHeigt > 0? viewHeigt : self.minHeight ) - (10*2);
+    CGFloat textHeight  = ( viewHeigt > 0? viewHeigt : self.minHeight ) - (self.verticalSpace*2)-self.inputViewBottom;
     
     self.textView.frame = CGRectMake(14, 10, 287, textHeight );
     self.imageButton.frame = CGRectMake(244, 5, 29, 25);
@@ -128,7 +131,7 @@
                                                                        attribute:NSLayoutAttributeTrailing
                                                                       multiplier:1
                                                                         constant:0];
-    //自身高度为55
+    //自身高度为
     CGFloat height = (self.minHeight + self.inputViewBottom);
     self.heightConstraint = [NSLayoutConstraint constraintWithItem:self
                                                          attribute:NSLayoutAttributeHeight
@@ -200,6 +203,8 @@
     if ([self.delegate respondsToSelector:@selector(hz_chatInputView:sendText:)]) {
         [self.delegate hz_chatInputView:self sendText:self.textView.text];
     }
+    
+    [self.textView resignFirstResponder];
 }
 
 #pragma mark  notification
@@ -227,10 +232,12 @@
             CGRect textRect = textView.frame;
             CGSize textSize = textRect.size;
             // height 计算有误差，通过比较，不让 textheight 小于最小高度
-            textSize.height = height> (self.minHeight-10*2) ? height : (self.minHeight-10*2) ;
+            CGFloat space = self.verticalSpace*2;
+            CGFloat textViewHeight = (self.minHeight-space);
+            textSize.height = height> textViewHeight ? height : textViewHeight ;
             textView.frame = CGRectMake( textRect.origin.x, textRect.origin.y,textSize.width,textSize.height);
 
-            self.heightConstraint.constant = textSize.height+(10*2) + self.inputViewBottom  ;
+            self.heightConstraint.constant = textSize.height+space+ self.inputViewBottom  ;
         }
     }
     
