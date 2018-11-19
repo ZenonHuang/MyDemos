@@ -98,9 +98,10 @@
     CGFloat viewHeigt = self.frame.size.height;
     CGFloat textHeight  = ( viewHeigt > 0? viewHeigt : self.minHeight ) - (self.verticalSpace*2)-self.inputViewBottom;
     
-    self.textView.frame = CGRectMake(14, 10, 287, textHeight );
+    self.textView.frame = CGRectMake(15, 10, 287, textHeight );
     self.imageButton.frame = CGRectMake(244, 5, 29, 25);
-    self.placeholderLabel.frame = CGRectMake(15, 7, self.textView.frame.size.width-7, 21);
+    UIEdgeInsets insets = self.textView.textContainerInset;
+    self.placeholderLabel.frame = CGRectMake(insets.left, 7, self.textView.frame.size.width-7, 21);
     
     [self layoutSendButton];
 }
@@ -271,7 +272,9 @@
         _textView = [[UITextView alloc] init];
         _textView.backgroundColor = [UIColor grayColor];//#F7F7F7
         _textView.font       = self.inputTextFont;
+        _textView.textAlignment = NSTextAlignmentLeft;
         _textView.textContainerInset = UIEdgeInsetsMake(7, 15, 7, 15);
+        _textView.textContainer.lineFragmentPadding = 0;
         _textView.returnKeyType = UIReturnKeySend ;
         _textView.delegate = self;
     }

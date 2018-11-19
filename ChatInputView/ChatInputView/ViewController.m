@@ -53,7 +53,7 @@
         _chatInputView.delegate = self;
         _chatInputView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _chatInputView.textViewBackgroundColor = [UIColor whiteColor];
-        _chatInputView.inputTextFont = [UIFont italicSystemFontOfSize:18];
+        _chatInputView.inputTextFont = [UIFont systemFontOfSize:15];
         _chatInputView.maxTextHeight = 200;
         _chatInputView.placeholderText = @"input some..";
         _chatInputView.sendButtonNormalColor = [UIColor orangeColor];
