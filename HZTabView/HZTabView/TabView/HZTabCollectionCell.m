@@ -21,7 +21,7 @@
         return nil;
     }
     
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     
     [self.contentView addSubview:self.titleLabel];
     

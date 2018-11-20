@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "HZTabModel.h"
 
+typedef NS_ENUM(NSInteger, HZTabViewLineStyle) {
+    HZTabViewLineStyleDefault = 0,
+    HZTabViewLineStyleBackground
+};
+
+
 @class HZTabView;
 
 @protocol HZTabViewDelegate <NSObject>
@@ -23,10 +29,11 @@
 @property (nonatomic,strong) UIColor  *selectedTextColor;
 @property (nonatomic,strong) UIColor  *normalTextColor;
 
+@property (nonatomic,assign) NSInteger currentSelectedIndex;
+
+@property (nonatomic,assign) HZTabViewLineStyle lineStyle;
 @property (nonatomic,strong) UIColor  *lineColor;
 @property (nonatomic,assign) CGFloat  lineHeight;
-
-@property (nonatomic,assign) NSInteger currentSelectedIndex;
 
 - (void)reloadData;
 @end

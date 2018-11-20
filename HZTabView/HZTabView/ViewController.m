@@ -34,6 +34,8 @@
     if (!_tabView) {
         _tabView = [[HZTabView alloc] init];
         _tabView.delegate = self;
+        _tabView.lineStyle = HZTabViewLineStyleBackground;
+        _tabView.lineColor = [UIColor orangeColor];
         
         HZTabModel *model1 = [[HZTabModel alloc] init];
         model1.title = @"你好";

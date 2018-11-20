@@ -28,8 +28,9 @@ static NSString *tabCellID = @"tabCellID";
         return nil;
     }
     
-    [self addSubview:self.titleCollectionView];
+    
     [self addSubview:self.lineView];
+    [self addSubview:self.titleCollectionView];
     return self;
 }
 
@@ -45,12 +46,20 @@ static NSString *tabCellID = @"tabCellID";
 #pragma mark - private
 - (void)moveLineView{
     CGSize size = self.bounds.size;
-    CGFloat height = self.lineHeight==0 ? 2 : self.lineHeight;
     
+    CGFloat height = self.lineHeight==0 ? 2 : self.lineHeight;
+
     CGFloat lineX = self.currentSelectedIndex*self.itemWidth;
     
     [UIView animateWithDuration:0.2 animations:^{
-        self.lineView.frame = CGRectMake(lineX, size.height-height, self.itemWidth, height);
+        if (self.lineStyle == HZTabViewLineStyleDefault) {
+               self.lineView.frame = CGRectMake(lineX, size.height-height, self.itemWidth, height);
+        }
+        
+        if (self.lineStyle == HZTabViewLineStyleBackground) {
+            self.lineView.frame = CGRectMake(lineX, 0, self.itemWidth, size.height);
+        }
+        
     }];
  
 }
@@ -182,7 +191,7 @@ static NSString *tabCellID = @"tabCellID";
     if (!_titleCollectionView) {
         _titleCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                                   collectionViewLayout:self.flowLayout];
-        _titleCollectionView.backgroundColor = [UIColor whiteColor];
+        _titleCollectionView.backgroundColor = [UIColor clearColor];
         _titleCollectionView.delegate = self;
         _titleCollectionView.dataSource = self;
         [_titleCollectionView registerClass:[HZTabCollectionCell class]
