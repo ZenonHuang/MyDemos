@@ -10,7 +10,6 @@
 
 @interface HZTabCollectionCell ()
 @property (nonatomic,strong) UILabel *titleLabel;
-@property (nonatomic,strong) UIView  *indicatorView;
 @end
 
 @implementation HZTabCollectionCell
@@ -22,8 +21,9 @@
         return nil;
     }
     
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.indicatorView];
+    self.backgroundColor = [UIColor whiteColor];
+    
+    [self.contentView addSubview:self.titleLabel];
     
     return self;
 }
@@ -33,46 +33,41 @@
     
     CGSize size = self.bounds.size;
     
-    CGFloat titleHeight = 20;
-    self.titleLabel.frame = CGRectMake(0, (size.height - titleHeight)/2, size.width, titleHeight);
+   
+    CGSize titleSize = [self.titleLabel sizeThatFits:CGSizeMake(size.width, MAXFLOAT)];;
+    CGFloat titleHeight = titleSize.height;
     
-    CGFloat height = 2;
-    self.indicatorView.frame = CGRectMake(0, size.height-height, size.width, height);
+    self.titleLabel.frame = CGRectMake(0, (size.height - titleHeight)/2, size.width, titleHeight);
+
 }
 
 #pragma mark - private
 
 - (void)configureSelected:(BOOL)isSelected{
     if (isSelected) {
-        self.titleLabel.textColor = [UIColor grayColor];
-        self.indicatorView.backgroundColor = [UIColor clearColor];
+        self.titleLabel.textColor = [self.dataSource hz_tabCellSelectedTextColor];
         return;
     }
     
-    self.titleLabel.textColor = [UIColor blackColor];
-    self.indicatorView.backgroundColor = [UIColor redColor];
+    self.titleLabel.textColor = [self.dataSource hz_tabCellNormalTextColor];
+
 }
 
 #pragma mark - setter
 - (void)setModel:(HZTabModel *)model{
+    NSAssert([model isKindOfClass:[HZTabModel class]], @"检查传入的 model 类型");
     _model = model;
     self.titleLabel.text = model.title;
     [self configureSelected:model.selected];
+    [self layoutSubviews];
 }
 
 #pragma mark - getter
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        
-    }
-    return _titleLabel;
-}
-
-- (UIView *)indicatorView{
-    if (!_indicatorView) {
-        _indicatorView = [[UIView alloc] init];
-        
+        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
 }

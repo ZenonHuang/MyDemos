@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "HZTabModel.h"
 
+@class HZTabCollectionCell;
+
+@protocol HZTabCollectionCellDataSource <NSObject>
+
+- (UIColor *)hz_tabCellNormalTextColor;
+
+- (UIColor *)hz_tabCellSelectedTextColor;
+
+@end
+
 @interface HZTabCollectionCell : UICollectionViewCell
+@property (nonatomic,weak)  id<HZTabCollectionCellDataSource> dataSource;
 @property (nonatomic,strong) HZTabModel *model;
 @end

@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface HZTabModel : NSObject
-@property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy)   NSString *title;
 @property (nonatomic,assign) BOOL   selected;
 @end
