@@ -46,11 +46,12 @@
 - (void)configureSelected:(BOOL)isSelected{
     if (isSelected) {
         self.titleLabel.textColor = [self.dataSource hz_tabCellSelectedTextColor];
+        self.titleLabel.font      = [self.dataSource hz_tabCellSelectedFont];
         return;
     }
     
     self.titleLabel.textColor = [self.dataSource hz_tabCellNormalTextColor];
-
+    self.titleLabel.font      = [self.dataSource hz_tabCellNormalFont];
 }
 
 #pragma mark - setter
@@ -66,7 +67,7 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.font = [self.dataSource hz_tabCellNormalFont];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;

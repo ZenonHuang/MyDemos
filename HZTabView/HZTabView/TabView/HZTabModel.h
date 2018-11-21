@@ -6,9 +6,11 @@
 //  Copyright © 2018年 ZenonHuang. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface HZTabModel : NSObject
 @property (nonatomic,copy)   NSString *title;
 @property (nonatomic,assign) BOOL   selected;
+
+- (CGFloat)textWidth:(UIFont *)textFont;
 @end

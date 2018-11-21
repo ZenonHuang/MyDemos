@@ -17,6 +17,10 @@
 
 - (UIColor *)hz_tabCellSelectedTextColor;
 
+- (UIFont *)hz_tabCellNormalFont;
+
+- (UIFont *)hz_tabCellSelectedFont;
+
 @end
 
 @interface HZTabCollectionCell : UICollectionViewCell

@@ -8,11 +8,12 @@
 
 #import "HZTabView.h"
 #import "HZTabCollectionCell.h"
+#import "HZTabCollectionView.h"
 
 static NSString *tabCellID = @"tabCellID";
 
 @interface HZTabView ()<UICollectionViewDelegate,UICollectionViewDataSource,HZTabCollectionCellDataSource>
-@property (nonatomic,strong) UICollectionView *titleCollectionView;
+@property (nonatomic,strong) HZTabCollectionView *titleCollectionView;
 @property (nonatomic,strong) UICollectionViewFlowLayout *flowLayout;
 
 @property (nonatomic,strong) UIView *lineView;
@@ -27,15 +28,20 @@ static NSString *tabCellID = @"tabCellID";
     if (!self) {
         return nil;
     }
+
+    [self.titleCollectionView addSubview:self.lineView];
+    self.titleCollectionView.lineView = self.lineView;
     
-    
-    [self addSubview:self.lineView];
     [self addSubview:self.titleCollectionView];
+    
+    self.layer.masksToBounds = YES;
     return self;
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+    
+    [self.titleCollectionView sendSubviewToBack:self.lineView];
     
     CGSize size = self.bounds.size;
     self.titleCollectionView.frame = CGRectMake(0, 0, size.width, size.height);
@@ -48,16 +54,50 @@ static NSString *tabCellID = @"tabCellID";
     CGSize size = self.bounds.size;
     
     CGFloat height = self.lineHeight==0 ? 2 : self.lineHeight;
-
-    CGFloat lineX = self.currentSelectedIndex*self.itemWidth;
+    CGFloat lineWidth = 0;
+    if (self.widthStyle == HZTabViewWidthStyleAdapter) {
+        HZTabModel *model = [self.titleList objectAtIndex:self.currentSelectedIndex];
+        lineWidth = [model textWidth:self.titleFont];
+    }
+    if (self.widthStyle == HZTabViewWidthStyleDefault) {
+        lineWidth = self.itemWidth;
+    }
     
+    
+    CGFloat lineX = 0;
+    
+    if (self.widthStyle == HZTabViewWidthStyleAdapter) {
+#warning todo 宽度超过 collectionview
+        for (int i=0; i<self.currentSelectedIndex; i++) {
+            HZTabModel *model = [self.titleList objectAtIndex:i];
+            CGFloat width = [model textWidth:self.titleFont];
+            lineX = lineX + width;
+            
+        }
+        
+        //在区间之内，需要滑动 collection
+        if (lineX>(size.width/2)) {//超出半屏距离
+            
+            if ( self.titleCollectionView.contentSize.width-lineX < size.width/2 ) {//距离终点不到半屏
+                [self.titleCollectionView setContentOffset:CGPointMake(self.titleCollectionView.contentSize.width-size.width, 0) animated:NO];
+            }else{
+                [self.titleCollectionView setContentOffset:CGPointMake(lineX-size.width/2, 0) animated:YES];
+            }
+            
+        }
+        
+    }
+    if (self.widthStyle == HZTabViewWidthStyleDefault) {
+            lineX = self.currentSelectedIndex*self.itemWidth;
+    }
+
     [UIView animateWithDuration:0.2 animations:^{
         if (self.lineStyle == HZTabViewLineStyleDefault) {
-               self.lineView.frame = CGRectMake(lineX, size.height-height, self.itemWidth, height);
+               self.lineView.frame = CGRectMake(lineX, size.height-height, lineWidth, height);
         }
         
         if (self.lineStyle == HZTabViewLineStyleBackground) {
-            self.lineView.frame = CGRectMake(lineX, 0, self.itemWidth, size.height);
+            self.lineView.frame = CGRectMake(lineX, 0, lineWidth, size.height);
         }
         
     }];
@@ -67,6 +107,7 @@ static NSString *tabCellID = @"tabCellID";
 #pragma mark - public
 - (void)reloadData{
     [self.titleCollectionView reloadData];
+//    [self.titleCollectionView sendSubviewToBack:self.lineView];
 }
 
 #pragma mark - UICollectionViewDelegate / UICollectionViewDataSource
@@ -133,7 +174,14 @@ static NSString *tabCellID = @"tabCellID";
     NSUInteger count = self.titleList.count;
     
     if (count>0) {
-        return CGSizeMake(self.bounds.size.width/count, 40);
+        if (self.widthStyle==HZTabViewWidthStyleDefault) {
+            return CGSizeMake(self.bounds.size.width/count, 40);
+        }
+        if (self.widthStyle==HZTabViewWidthStyleAdapter) {
+            HZTabModel *model = [self.titleList objectAtIndex:indexPath.item];
+            CGFloat width = [model textWidth:self.titleFont];
+            return CGSizeMake(width, 40);
+        }
     }
     
     return CGSizeZero;
@@ -155,6 +203,21 @@ static NSString *tabCellID = @"tabCellID";
     return self.selectedTextColor;
 }
 
+- (UIFont *)hz_tabCellNormalFont{
+    if (!self.titleFont) {
+        return [UIFont systemFontOfSize:15];
+    }
+    
+    return self.titleFont;
+}
+
+- (UIFont *)hz_tabCellSelectedFont{
+    if (!self.titleSelectedFont) {
+        return [UIFont systemFontOfSize:15];
+    }
+    
+    return self.titleSelectedFont;
+}
 
 #pragma mark - setter
 - (void)setLineColor:(UIColor *)lineColor{
@@ -178,6 +241,7 @@ static NSString *tabCellID = @"tabCellID";
         _flowLayout.minimumLineSpacing = 0;
         // 每一列cell之间的间距
         // flowLayout.minimumInteritemSpacing = 10;
+        _flowLayout.minimumInteritemSpacing = 0;
         // 设置第一个cell和最后一个cell,与父控件之间的间距
 //        _flowLayout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
         
@@ -187,9 +251,9 @@ static NSString *tabCellID = @"tabCellID";
     return _flowLayout;
 }
 
-- (UICollectionView *)titleCollectionView{
+- (HZTabCollectionView *)titleCollectionView{
     if (!_titleCollectionView) {
-        _titleCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
+        _titleCollectionView = [[HZTabCollectionView alloc] initWithFrame:CGRectZero
                                                   collectionViewLayout:self.flowLayout];
         _titleCollectionView.backgroundColor = [UIColor clearColor];
         _titleCollectionView.delegate = self;

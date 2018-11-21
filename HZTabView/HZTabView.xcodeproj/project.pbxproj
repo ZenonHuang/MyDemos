@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A8046B721A54125006A6820 /* HZTabCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8046B621A54125006A6820 /* HZTabCollectionView.m */; };
 		7A9C6AAF21A25C7F00FC2A8D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9C6AAE21A25C7F00FC2A8D /* AppDelegate.m */; };
 		7A9C6AB221A25C7F00FC2A8D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9C6AB121A25C7F00FC2A8D /* ViewController.m */; };
 		7A9C6AB521A25C7F00FC2A8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A9C6AB321A25C7F00FC2A8D /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A8046B521A54119006A6820 /* HZTabCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZTabCollectionView.h; sourceTree = "<group>"; };
+		7A8046B621A54125006A6820 /* HZTabCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZTabCollectionView.m; sourceTree = "<group>"; };
 		7A9C6AAA21A25C7F00FC2A8D /* HZTabView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZTabView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9C6AAD21A25C7F00FC2A8D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A9C6AAE21A25C7F00FC2A8D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				7A9C6AC821A25DBF00FC2A8D /* HZTabCollectionCell.m */,
 				7A9C6ACA21A2622B00FC2A8D /* HZTabModel.h */,
 				7A9C6ACB21A2623700FC2A8D /* HZTabModel.m */,
+				7A8046B521A54119006A6820 /* HZTabCollectionView.h */,
+				7A8046B621A54125006A6820 /* HZTabCollectionView.m */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A9C6AB221A25C7F00FC2A8D /* ViewController.m in Sources */,
+				7A8046B721A54125006A6820 /* HZTabCollectionView.m in Sources */,
 				7A9C6AC921A25DBF00FC2A8D /* HZTabCollectionCell.m in Sources */,
 				7A9C6ABD21A25C8100FC2A8D /* main.m in Sources */,
 				7A9C6AC621A25CB100FC2A8D /* HZTabView.m in Sources */,

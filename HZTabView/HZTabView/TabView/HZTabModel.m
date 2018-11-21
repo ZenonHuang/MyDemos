@@ -15,6 +15,14 @@
 
 @implementation HZTabModel
 
+- (CGFloat)textWidth:(UIFont *)textFont{
+    UILabel *label = [[UILabel alloc] init];
+    label.font = textFont;
+    label.text = self.title;
+    [label sizeToFit];
+    
+    return label.bounds.size.width;
+}
 
 @end
 
