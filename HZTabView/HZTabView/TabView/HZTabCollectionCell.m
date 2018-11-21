@@ -33,7 +33,6 @@
     
     CGSize size = self.bounds.size;
     
-   
     CGSize titleSize = [self.titleLabel sizeThatFits:CGSizeMake(size.width, MAXFLOAT)];;
     CGFloat titleHeight = titleSize.height;
     

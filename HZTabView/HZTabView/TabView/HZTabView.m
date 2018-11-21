@@ -91,6 +91,11 @@ static NSString *tabCellID = @"tabCellID";
             lineX = self.currentSelectedIndex*self.itemWidth;
     }
 
+    
+    if (self.lineStyle == HZTabViewLineStyleNone) {
+        self.lineView.hidden = YES;
+        return;
+    }
     [UIView animateWithDuration:0.2 animations:^{
         if (self.lineStyle == HZTabViewLineStyleDefault) {
                self.lineView.frame = CGRectMake(lineX, size.height-height, lineWidth, height);
@@ -143,12 +148,16 @@ static NSString *tabCellID = @"tabCellID";
         NSAssert(NO, @"indexPat.row error -- 检查数据源");
     }
     
-    
     //取消之前选择
     HZTabModel *preModel = [self.titleList objectAtIndex:self.currentSelectedIndex];
     preModel.selected = NO;
-    HZTabCollectionCell *preCell = (HZTabCollectionCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:self.currentSelectedIndex inSection:0]];
-    preCell.model = preModel;
+    NSIndexPath *preIndexPath = [NSIndexPath indexPathForItem:self.currentSelectedIndex inSection:0];
+    if ( [[collectionView indexPathsForVisibleItems] containsObject:preIndexPath]) {
+        HZTabCollectionCell *preCell = (HZTabCollectionCell *)[collectionView cellForItemAtIndexPath:preIndexPath];
+        if ([[collectionView visibleCells] containsObject:preCell]) {
+            preCell.model = preModel;
+        }
+    }
     
     //设置当前选中
     HZTabModel *model = [self.titleList objectAtIndex:indexPath.row];
@@ -158,6 +167,8 @@ static NSString *tabCellID = @"tabCellID";
     
     //更新当前 index
     self.currentSelectedIndex = indexPath.item;
+    
+    [collectionView reloadData];
     
     [self moveLineView];
     
@@ -179,7 +190,8 @@ static NSString *tabCellID = @"tabCellID";
         }
         if (self.widthStyle==HZTabViewWidthStyleAdapter) {
             HZTabModel *model = [self.titleList objectAtIndex:indexPath.item];
-            CGFloat width = [model textWidth:self.titleFont];
+            UIFont *font = (self.currentSelectedIndex == indexPath.item) ? self.titleSelectedFont: self.titleFont;
+            CGFloat width = [model textWidth:font];
             return CGSizeMake(width, 40);
         }
     }

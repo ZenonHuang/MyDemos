@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSInteger, HZTabViewLineStyle) {
     HZTabViewLineStyleDefault = 0,
-    HZTabViewLineStyleBackground
+    HZTabViewLineStyleBackground,
+    HZTabViewLineStyleNone
 };
 
 typedef NS_ENUM(NSInteger, HZTabViewWidthStyle) {
