@@ -19,7 +19,7 @@ HZGaugeView  | 绘制仪表盘。                            | 2017/06/28
 ARDemo | ARKit 模型使用，立方体放置                     |  2018/01/07
 CopyLabel | 文本复制功能的 label                       |  2018/09/10
 Throttle | 函数节流 / 函数防抖 -- 限制方法调用的频次      |  2018/09/13
-
+JoyStick | 虚拟摇杆      |  2019/01/14
 
 ## 🐚 Shell 脚本 
 
