@@ -48,6 +48,7 @@ AutoProto | 自动提取服务器的 proto 文件，并输出OC文件  |  2018/1
 ------- | ------- | -------
 AdCellDemo     | 利用 AOP 方式插入广告等类型 Cell          | 2016/12/29
 NestedScrollView | 嵌套 ScrollView 滑动               |  2018/09/08
+DynamicDelegate | BlocksKit 动态代理,用 block 发送代理消息 | 2019/01/18
 
 ## 🍋 SDK / 新语言 使用
 
