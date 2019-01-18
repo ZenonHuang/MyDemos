@@ -26,6 +26,7 @@
     void (^orig)(NSInteger) = [self blockImplementationForMethod:_cmd];
     if (orig){
         orig(num);
+        orig = nil;
     }
 }
 
