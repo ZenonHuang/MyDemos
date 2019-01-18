@@ -8,9 +8,6 @@
 
 #import "HZManager.h"
 
-
-
-
 @interface HZManager ()
 @property (nonatomic,assign) NSInteger nowNum;
 @end
