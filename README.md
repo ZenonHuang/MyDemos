@@ -21,6 +21,7 @@ CopyLabel | 文本复制功能的 label                       |  2018/09/10
 Throttle | 函数节流 / 函数防抖 -- 限制方法调用的频次      |  2018/09/13
 JoyStick | 虚拟摇杆      |  2019/01/14
 FloatView | 悬浮按钮 (自动贴边，定时缩小) |  2019/01/18
+HZCountTimeButton | 倒计时按钮(如验证码) | 2019/01/31
 
 ## 🐚 Shell 脚本 
 
