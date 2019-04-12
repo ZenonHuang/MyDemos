@@ -21,6 +21,7 @@
 @property (nonatomic,strong) UILabel *rightLabel;
 @property (nonatomic,strong) UILabel *bottomLabel;
 
+@property (nonatomic,strong) UIView *standardView;
 @property (nonatomic,strong) UIView *keepVerticalLine;
 @property (nonatomic,strong) UIView *keepHorizontalLine;
 @end
@@ -55,18 +56,19 @@
     [self.alignView addSubview:self.bottomLabel];
     [self layoutLabels];
     
-    if (self.keepHorizontalLine.superview) {
+    if (self.standardView.superview) {
         return;
     }
     
+    
+    [delegateWindow addSubview:self.standardView];
     [delegateWindow addSubview:self.keepVerticalLine];
     [delegateWindow addSubview:self.keepHorizontalLine];
     
-    UIPanGestureRecognizer *verticalPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.keepVerticalLine   addGestureRecognizer:verticalPan];
+    self.standardView.frame = CGRectMake(self.keepVerticalLine.centerX, self.keepHorizontalLine.centerY, 50, 50);
     
-    UIPanGestureRecognizer *horizontalPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-    [self.keepHorizontalLine addGestureRecognizer:horizontalPan];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    [self.standardView   addGestureRecognizer:pan];
 }
 
 - (void)changePostion
@@ -107,7 +109,7 @@
 - (void)pan:(UIPanGestureRecognizer *)sender{
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:{//开始拖动
-            NSLog(@"开始拖动");
+         
             break;
         }
         case UIGestureRecognizerStateChanged:{//拖动中
@@ -118,18 +120,13 @@
             //3、重新设置控件位置
             UIView *panView = sender.view;
             
-
-            CGPoint centerPoint ;
-            if (panView==self.keepVerticalLine) {
-                CGFloat newX = panView.centerX+offsetPoint.x;
-                centerPoint = CGPointMake(newX, self.alignView.height/2);
-            }else{
-                CGFloat newY = panView.centerY+offsetPoint.y;
-                centerPoint = CGPointMake(self.alignView.width/2, newY);
-            }
+            CGFloat newX = panView.centerX+offsetPoint.x;
+            self.keepVerticalLine.center = CGPointMake(newX, self.alignView.height/2);
             
-           
-            panView.center = centerPoint;
+            CGFloat newY = panView.centerY+offsetPoint.y;
+            self.keepHorizontalLine.center = CGPointMake(self.alignView.width/2, newY);
+            
+            panView.center = CGPointMake(newX, newY);
             
             NSLog(@"拖动中");
             break;
@@ -207,6 +204,15 @@
         _alignView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, HZScreenWidth, HZScreenHeight)];
     }
     return _alignView;
+}
+
+- (UIView *)standardView
+{
+    if (!_standardView) {
+        _standardView = [[UIView alloc] init];
+        _standardView.backgroundColor = [UIColor orangeColor];
+    }
+    return _standardView;
 }
 
 - (UIView *)horizontalLine
