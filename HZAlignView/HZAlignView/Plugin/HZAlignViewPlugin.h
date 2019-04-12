@@ -18,4 +18,7 @@
 - (void)showAlignLineFor:(UIView *)view;
 - (void)changePostion;
 - (void)hiddenAlignLine;
+
+/// targetView 贴向吸附线
+- (void)countNewPoint;
 @end

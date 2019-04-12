@@ -55,6 +55,9 @@
         case UIGestureRecognizerStateEnded://拖动结束
         case UIGestureRecognizerStateCancelled:
         {
+            
+            [[HZAlignViewPlugin shareInstance] countNewPoint];
+            
             [[HZAlignViewPlugin shareInstance] hiddenAlignLine];
              NSLog(@"拖动结束");
             break;

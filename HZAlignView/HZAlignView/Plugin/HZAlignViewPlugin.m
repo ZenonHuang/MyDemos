@@ -20,6 +20,9 @@
 @property (nonatomic,strong) UILabel *topLabel;
 @property (nonatomic,strong) UILabel *rightLabel;
 @property (nonatomic,strong) UILabel *bottomLabel;
+
+@property (nonatomic,strong) UIView *keepVerticalLine;
+@property (nonatomic,strong) UIView *keepHorizontalLine;
 @end
 
 @implementation HZAlignViewPlugin
@@ -51,6 +54,19 @@
     [self.alignView addSubview:self.topLabel];
     [self.alignView addSubview:self.bottomLabel];
     [self layoutLabels];
+    
+    if (self.keepHorizontalLine.superview) {
+        return;
+    }
+    
+    [delegateWindow addSubview:self.keepVerticalLine];
+    [delegateWindow addSubview:self.keepHorizontalLine];
+    
+    UIPanGestureRecognizer *verticalPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    [self.keepVerticalLine   addGestureRecognizer:verticalPan];
+    
+    UIPanGestureRecognizer *horizontalPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    [self.keepHorizontalLine addGestureRecognizer:horizontalPan];
 }
 
 - (void)changePostion
@@ -64,8 +80,71 @@
     [self.alignView removeAllSubviews];
     [self.alignView removeFromSuperview];
     self.targetView = nil;
+    
+//    [self.keepVerticalLine removeFromSuperview];
+//    [self.keepHorizontalLine removeFromSuperview];
 }
 
+- (void)countNewPoint
+{
+    UIView *targetView = self.targetView;
+    
+    if (targetView.origin.x>self.keepVerticalLine.centerX) {
+        targetView.centerX = (self.keepVerticalLine.centerX+targetView.width/2);
+    }else{
+        targetView.centerX = (self.keepVerticalLine.centerX-targetView.width/2);
+    }
+    
+    if (targetView.origin.y>self.keepHorizontalLine.centerY) {
+        targetView.centerY = (self.keepHorizontalLine.centerY+targetView.height/2);
+    }else{
+        targetView.centerY = (self.keepHorizontalLine.centerY-targetView.height/2);
+    }
+    
+}
+
+#pragma mark - action
+- (void)pan:(UIPanGestureRecognizer *)sender{
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:{//开始拖动
+            NSLog(@"开始拖动");
+            break;
+        }
+        case UIGestureRecognizerStateChanged:{//拖动中
+            //1、获得拖动位移
+            CGPoint offsetPoint = [sender translationInView:sender.view];
+            //2、清空拖动位移
+            [sender setTranslation:CGPointZero inView:sender.view];
+            //3、重新设置控件位置
+            UIView *panView = sender.view;
+            
+
+            CGPoint centerPoint ;
+            if (panView==self.keepVerticalLine) {
+                CGFloat newX = panView.centerX+offsetPoint.x;
+                centerPoint = CGPointMake(newX, self.alignView.height/2);
+            }else{
+                CGFloat newY = panView.centerY+offsetPoint.y;
+                centerPoint = CGPointMake(self.alignView.width/2, newY);
+            }
+            
+           
+            panView.center = centerPoint;
+            
+            NSLog(@"拖动中");
+            break;
+        }
+        case UIGestureRecognizerStateEnded://拖动结束
+        case UIGestureRecognizerStateCancelled:
+        {
+            NSLog(@"拖动结束");
+            break;
+        }
+        default:
+            break;
+    }
+    
+}
 #pragma mrak - private
 
 - (void)resetPosition
@@ -146,6 +225,26 @@
         _verticalLine.backgroundColor = [UIColor grayColor];
     }
     return _verticalLine;
+}
+
+- (UIView *)keepVerticalLine
+{
+    if (!_keepVerticalLine) {
+        _keepVerticalLine = [[UIView alloc] initWithFrame:CGRectMake(self.targetView.centerX-0.25, 0, 0.5, self.alignView.height)];
+        _keepVerticalLine.backgroundColor = [UIColor grayColor];
+        _keepVerticalLine.userInteractionEnabled = YES;
+    }
+    return _keepVerticalLine;
+}
+
+- (UIView *)keepHorizontalLine
+{
+    if (!_keepHorizontalLine) {
+        _keepHorizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.targetView.centerY-0.25, self.alignView.width, 0.5)];
+        _keepHorizontalLine.backgroundColor = [UIColor grayColor];
+        _keepHorizontalLine.userInteractionEnabled = YES;
+    }
+    return _keepHorizontalLine;
 }
 
 - (UILabel *)leftLabel
