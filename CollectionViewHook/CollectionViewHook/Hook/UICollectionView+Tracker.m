@@ -38,14 +38,15 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
         SEL newSel = [NSObject HZ_newSelFormOriginalSel:sel ];
         
         Method originMethod = class_getInstanceMethod(delegate.class, sel);
-        NSString *originMethodAddress = [NSString stringWithFormat:@"%p",originMethod];
         
+        NSString *originMethodAddress = [NSString stringWithFormat:@"%p",originMethod];
         NSLog(@"originMethod %@",originMethodAddress);
         
         if (originMethod && ![delegate.class HZ_methodHasSwizzed:sel]) {
 //    解决方案    if (originMethod && ![[HZTrackerCenter sharedInstance] HZ_swizzleHasSetMethodFor:originMethodAddress]) {
             
-            class_addMethod(delegate.class, newSel, (IMP)HZ_collectionViewDidSelectRowAtIndexPath, method_getTypeEncoding(originMethod));
+            IMP newIMP =  (IMP)HZ_collectionViewDidSelectRowAtIndexPath;
+            class_addMethod(delegate.class, newSel,newIMP, method_getTypeEncoding(originMethod));
             [delegate.class HZ_swizzleMethod:sel newSel:newSel];
             
             [delegate.class HZ_setMethodHasSwizzed:sel];

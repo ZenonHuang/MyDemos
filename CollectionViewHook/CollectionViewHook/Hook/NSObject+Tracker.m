@@ -18,7 +18,9 @@
     
     if (originMethod && newMethod) {
         if (class_addMethod(self, originalSel, method_getImplementation(newMethod), method_getTypeEncoding(newMethod))) {
-            class_replaceMethod(self, newSel, method_getImplementation(originMethod), method_getTypeEncoding(originMethod));
+            
+            IMP orginIMP = method_getImplementation(originMethod);
+            class_replaceMethod(self, newSel, orginIMP, method_getTypeEncoding(originMethod));
         } else {
             method_exchangeImplementations(originMethod, newMethod);
         }
