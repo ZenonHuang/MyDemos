@@ -42,15 +42,17 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
         NSString *originMethodAddress = [NSString stringWithFormat:@"%p",originMethod];
         NSLog(@"originMethod %@",originMethodAddress);
         
-        if (originMethod && ![delegate.class HZ_methodHasSwizzed:sel]) {
-//    解决方案    if (originMethod && ![[HZTrackerCenter sharedInstance] HZ_swizzleHasSetMethodFor:originMethodAddress]) {
-            
+//问题方案        if (originMethod && ![delegate.class HZ_methodHasSwizzed:sel]) {
+/**   解决方案 **/
+        if (originMethod && ![[HZTrackerCenter sharedInstance] HZ_swizzleHasSetMethodFor:originMethodAddress]) {
+        
             IMP newIMP =  (IMP)HZ_collectionViewDidSelectRowAtIndexPath;
             class_addMethod(delegate.class, newSel,newIMP, method_getTypeEncoding(originMethod));
             [delegate.class HZ_swizzleMethod:sel newSel:newSel];
             
             [delegate.class HZ_setMethodHasSwizzed:sel];
-            [[HZTrackerCenter sharedInstance] HZ_swizzleSetMethod:originMethodAddress forClss:NSStringFromClass(delegate.class) ];
+            [[HZTrackerCenter sharedInstance] HZ_swizzleSetMethod:originMethodAddress
+                                                          forClss:NSStringFromClass(delegate.class) ];
         }
     }
     [self HZ_setDelegate:delegate];

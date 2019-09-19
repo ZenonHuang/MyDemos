@@ -22,12 +22,16 @@
         return nil;
     }
     
-    [self addSubview:self.collectionView];
+   
 
     
     return self;
 }
 
+- (void)setupCollectionView
+{
+     [self addSubview:self.collectionView];
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -118,4 +122,9 @@
     
     return self;
 }
+@end
+
+@implementation HZCategorySubOneView
+
+
 @end

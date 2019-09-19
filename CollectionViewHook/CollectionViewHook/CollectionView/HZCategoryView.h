@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface HZCategoryView : UIView
-
+- (void)setupCollectionView;
 @end
 
 @interface HZCategorySubView : HZCategoryView
+
+@end
+
+
+@interface HZCategorySubOneView : HZCategorySubView
 
 @end
