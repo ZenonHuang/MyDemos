@@ -22,6 +22,8 @@ Throttle | 函数节流 / 函数防抖 -- 限制方法调用的频次      |  20
 JoyStick | 虚拟摇杆      |  2019/01/14
 FloatView | 悬浮按钮 (自动贴边，定时缩小) |  2019/01/18
 HZCountTimeButton | 倒计时按钮(如验证码) | 2019/01/31
+CollectionViewHook |  Hook 父子类时序造成的问题及解决 | 2019/09/19
+BluetoothForKeyboard | 蓝牙设备连接 | 2019/10/18
 
 ## 🐚 Shell 脚本 
 
