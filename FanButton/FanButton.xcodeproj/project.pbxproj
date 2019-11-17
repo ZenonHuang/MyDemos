@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7A4A1813237FFF230042E088 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A1812237FFF230042E088 /* AppDelegate.m */; };
-		7A4A1816237FFF230042E088 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A1815237FFF230042E088 /* SceneDelegate.m */; };
 		7A4A1819237FFF230042E088 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A1818237FFF230042E088 /* ViewController.m */; };
 		7A4A181C237FFF230042E088 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4A181A237FFF230042E088 /* Main.storyboard */; };
 		7A4A181E237FFF250042E088 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4A181D237FFF250042E088 /* Assets.xcassets */; };
@@ -21,8 +20,6 @@
 		7A4A180E237FFF230042E088 /* FanButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4A1811237FFF230042E088 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A4A1812237FFF230042E088 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7A4A1814237FFF230042E088 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		7A4A1815237FFF230042E088 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		7A4A1817237FFF230042E088 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7A4A1818237FFF230042E088 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7A4A181B237FFF230042E088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,8 +64,6 @@
 				7A4A182A237FFF2D0042E088 /* SubButton */,
 				7A4A1811237FFF230042E088 /* AppDelegate.h */,
 				7A4A1812237FFF230042E088 /* AppDelegate.m */,
-				7A4A1814237FFF230042E088 /* SceneDelegate.h */,
-				7A4A1815237FFF230042E088 /* SceneDelegate.m */,
 				7A4A1817237FFF230042E088 /* ViewController.h */,
 				7A4A1818237FFF230042E088 /* ViewController.m */,
 				7A4A181A237FFF230042E088 /* Main.storyboard */,
@@ -163,7 +158,6 @@
 				7A4A1813237FFF230042E088 /* AppDelegate.m in Sources */,
 				7A4A1824237FFF250042E088 /* main.m in Sources */,
 				7A4A182C237FFF550042E088 /* HZSubFanButton.m in Sources */,
-				7A4A1816237FFF230042E088 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
