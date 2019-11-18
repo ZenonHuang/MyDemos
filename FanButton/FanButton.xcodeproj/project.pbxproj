@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A0CA328238242A50006AB74 /* HZCenterFanButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CA327238242A50006AB74 /* HZCenterFanButton.m */; };
 		7A4A1813237FFF230042E088 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A1812237FFF230042E088 /* AppDelegate.m */; };
 		7A4A1819237FFF230042E088 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4A1818237FFF230042E088 /* ViewController.m */; };
 		7A4A181C237FFF230042E088 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4A181A237FFF230042E088 /* Main.storyboard */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A0CA326238242980006AB74 /* HZCenterFanButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCenterFanButton.h; sourceTree = "<group>"; };
+		7A0CA327238242A50006AB74 /* HZCenterFanButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZCenterFanButton.m; sourceTree = "<group>"; };
 		7A4A180E237FFF230042E088 /* FanButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4A1811237FFF230042E088 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7A4A1812237FFF230042E088 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,6 +83,8 @@
 			children = (
 				7A4A182D237FFF5F0042E088 /* HZSubFanButton.h */,
 				7A4A182B237FFF550042E088 /* HZSubFanButton.m */,
+				7A0CA326238242980006AB74 /* HZCenterFanButton.h */,
+				7A0CA327238242A50006AB74 /* HZCenterFanButton.m */,
 			);
 			path = SubButton;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A4A1819237FFF230042E088 /* ViewController.m in Sources */,
+				7A0CA328238242A50006AB74 /* HZCenterFanButton.m in Sources */,
 				7A4A1813237FFF230042E088 /* AppDelegate.m in Sources */,
 				7A4A1824237FFF250042E088 /* main.m in Sources */,
 				7A4A182C237FFF550042E088 /* HZSubFanButton.m in Sources */,

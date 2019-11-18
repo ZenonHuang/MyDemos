@@ -20,9 +20,4 @@
     return YES;
 }
 
-
-#pragma mark - UISceneSession lifecycle
-
-
-
 @end
