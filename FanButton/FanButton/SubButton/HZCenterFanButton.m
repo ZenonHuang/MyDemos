@@ -9,7 +9,7 @@
 #import "HZCenterFanButton.h"
 #import "HZSubFanButton.h"
 
-@interface HZCenterFanButton ()
+@interface HZCenterFanButton ()<HZSubFanButtonDelegate>
 @property (nonatomic,strong) UIButton *centerButton;
 @property (nonatomic,assign) BOOL  hasInsert;
 @end
@@ -23,8 +23,10 @@
         return nil;
     }
     
-
     [self addSubview:self.centerButton];
+    [self.centerButton addTarget:self
+                          action:@selector(tapCenterButton:)
+                forControlEvents:UIControlEventTouchUpInside];
     
     return self;
 }
@@ -33,38 +35,76 @@
 {
     [super layoutSubviews];
     
-    self.centerButton.frame = CGRectMake(0, 0, self.frame.size.width/4, self.frame.size.width/4);
+    self.centerButton.frame  = CGRectMake(0, 0, self.frame.size.width/4, self.frame.size.width/4);
     self.centerButton.center = CGPointMake(self.frame.size.width/2, self.frame.size.width/2);
     
     if (self.textList.count>0) {
         if (!self.hasInsert) {
-            
             self.hasInsert = YES;
-            
-            for (int i=0; i<self.textList.count; i++) {
-                NSString *text = self.textList[i];
-                
-                CGFloat averageAngle = 2*M_PI / self.textList.count;
-                CGFloat startAngle = i*averageAngle+M_PI/2;
-                CGFloat endAngle   = (i+1)*averageAngle+M_PI/2;
-                HZSubFanButton *subButton = [HZSubFanButton buttonWithAngle:startAngle
-                                                                   endAngle:endAngle ];
-                subButton.text = text;
-//                [subButton setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
-                CGFloat width = self.frame.size.width;
-                subButton.frame = CGRectMake(0, 0, width, width);
-                //        subButton.tag = 100;
-//                [self addSubview:subButton];
-                 [self insertSubview:subButton belowSubview:self.centerButton];
-            }
+            [self addSubButtons];
         }
-
-        
     }
-    
     
 }
 
+- (void)addSubButtons
+{
+    for (int i=0; i<self.textList.count; i++) {
+        NSString *text = self.textList[i];
+        
+        CGFloat averageAngle = 2*M_PI / self.textList.count;
+        CGFloat startAngle = i*averageAngle+M_PI/2;
+        CGFloat endAngle   = (i+1)*averageAngle+M_PI/2;
+        HZSubFanButton *subButton = [HZSubFanButton buttonWithAngle:startAngle
+                                                           endAngle:endAngle ];
+        subButton.text = text;
+        //                [subButton setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
+        subButton.index = i;
+        CGFloat width = self.frame.size.width;
+        subButton.frame = CGRectMake(0, 0, width, width);
+        //        subButton.tag = 100;
+        //                [self addSubview:subButton];
+        [self insertSubview:subButton belowSubview:self.centerButton];
+        
+        subButton.delegate = self;
+    }
+          
+}
+
+- (void)removeSubButtons
+{
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[HZSubFanButton class]]) {
+            [view removeFromSuperview];
+        }
+    }
+}
+
+- (void)tapCenterButton:(UIButton *)sender
+{
+    if (sender.isSelected) {
+        [self addSubButtons];
+    }else{
+        [self removeSubButtons];
+    }
+    
+    sender.selected = (!sender.isSelected);
+}
+
+#pragma mark - delegate
+- (void)clickBtn:(HZSubFanButton *)btn
+{
+    NSLog(@"btn tap %@",@(btn.index));
+}
+
+#pragma mark - setter
+- (void)setTitle:(NSString *)title
+{
+    _title = title;
+    [self.centerButton setTitle:_title forState:UIControlStateNormal];
+}
+
+#pragma mark - getter
 - (UIButton *)centerButton
 {
     if (!_centerButton) {

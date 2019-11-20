@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HZCenterFanButton : UIControl
-
-@property (nonatomic,strong) NSArray *textList;
-
+@property (nonatomic,strong) NSArray  *textList;
+@property (nonatomic,copy)   NSString *title;
 @end

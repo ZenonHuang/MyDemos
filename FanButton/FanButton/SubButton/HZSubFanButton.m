@@ -62,7 +62,10 @@
     [path closePath];
     
     //设置颜色（颜色设置也可以放在最上面，只要在绘制前都可以）
+    
     [[UIColor orangeColor] setStroke];
+    
+    [[UIColor colorWithWhite:0 alpha:0.5] setFill];
     
     //描边
     [path stroke];
