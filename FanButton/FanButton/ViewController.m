@@ -22,35 +22,24 @@
     // Do any additional setup after loading the view.
 
     
-    CGRect rect = CGRectMake(200, 200, 100, 100);
+    CGRect rect = CGRectMake(100, 200, 200, 200);
     
     HZCenterFanButton *centerButton = [[HZCenterFanButton alloc] init];
     centerButton.frame = rect;
     centerButton.userInteractionEnabled = YES;
+    
+    centerButton.textList = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"];
+    
     [self.view addSubview:centerButton];
     
     
-    self.subButton = [HZSubFanButton buttonWithAngle:M_PI*1.2
-                                            endAngle:M_PI*1.8 ];
-//    self.subButton.backgroundColor = [UIColor redColor];
-    self.subButton.frame = CGRectMake(0, 0, 100, 100);
-    self.subButton.tag = 100;
-    [centerButton addSubview:self.subButton];
+
     
-    
-    HZSubFanButton *button = [HZSubFanButton buttonWithAngle:M_PI*1.8 endAngle:M_PI*2.4];
-//    button.backgroundColor = [UIColor blueColor];
-    button.frame =CGRectMake(0, 0, 100, 100);
-    [centerButton addSubview:button];
-    button.tag = 200;
-    self.twoButton = button;
- 
 }
 
 - (void)clickBtnWithIndex:(NSInteger)index
 {
     NSLog(@"%li",index);
 }
-
 
 @end

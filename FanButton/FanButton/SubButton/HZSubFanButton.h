@@ -19,13 +19,15 @@
 
 @interface HZSubFanButton : UIButton
 
-@property(nonatomic, assign) id<HZSubFanButtonDelegate> delegate;
+@property (nonatomic,assign) id<HZSubFanButtonDelegate> delegate;
 
 @property (nonatomic,assign) CGFloat startAngle;
 @property (nonatomic,assign) CGFloat endAngle;
 
-@property(nonatomic, strong) UIBezierPath *bezierPath;//用于判断点击是否在画出来图形中
-
+@property (nonatomic,strong) UIBezierPath *bezierPath;//用于判断点击是否在画出来图形中
+@property (nonatomic,assign) BOOL    textNeedTransform;
+@property (nonatomic,copy)   NSString *text;
+ 
 + (instancetype)buttonWithAngle:(CGFloat)startAngle
                        endAngle:(CGFloat)endAngle;
 @end

@@ -10,4 +10,6 @@
 
 @interface HZCenterFanButton : UIControl
 
+@property (nonatomic,strong) NSArray *textList;
+
 @end
