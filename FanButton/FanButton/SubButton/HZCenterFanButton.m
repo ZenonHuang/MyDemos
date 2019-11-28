@@ -158,10 +158,8 @@
     return _centerButton;
 }
 
-- (HZSubFanButton *)touchInSubbutton:(UITouch *)touch
+- (HZSubFanButton *)subButtonForPoint:(CGPoint)point
 {
-    CGPoint point = [touch locationInView:self];
-
     for (UIView *view in self.subviews) {
         if ([view isKindOfClass:[HZSubFanButton class]]) {
             
@@ -173,7 +171,57 @@
         }
     }
     
+    return nil;
+}
+
+
+- (HZSubFanButton *)touchInSubbutton:(UITouch *)touch
+{
+    CGPoint point = [touch locationInView:self];
+    //落点在圆内
+    HZSubFanButton *button = [self subButtonForPoint:point];
+    if (button) {
+        return button;
+    }
+    //落点在圆外
+    CGFloat centrex = self.frame.size.width/2;          //圆心X
+    CGFloat centrey = self.frame.size.height/2;         //圆心Y
+    CGFloat radius = self.frame.size.width/2;//半径
+    CGFloat x;              //坐标系X
+    CGFloat y;              //坐标系Y
+
+    x = point.x - centrex;
+    y = centrey - point.y;
     
+    float current_radius =  sqrtf(x*x + y*y);           //计算改点到圆心的距离
+    if(current_radius > radius)
+    {
+        float circlex = fabs(x) / current_radius * radius;
+        float circley = fabs(y) / current_radius * radius;
+        if(x < 0 && y > 0)
+        {
+            x = centrex - circlex;
+            y = centrey - circley;
+        }
+        else if(x > 0 && y > 0)
+        {
+            x = centrex + circlex;
+            y = centrey - circley;
+        }
+        else if(x < 0 && y < 0)
+        {
+            x = centrex - circlex;
+            y = centrey + circley;
+        }
+        else if (x > 0 && y < 0)
+        {
+            x = centrex + circlex;
+            y = centrey + circley;
+        }
+        
+        CGPoint newPoint = CGPointMake(x, y);
+        return  [self subButtonForPoint:newPoint];
+    }
     return nil;
 }
 
