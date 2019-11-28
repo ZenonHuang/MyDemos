@@ -12,6 +12,8 @@
 @interface HZCenterFanButton ()<HZSubFanButtonDelegate>
 @property (nonatomic,strong) UIButton *centerButton;
 @property (nonatomic,assign) BOOL  hasInsert;
+
+@property (nonatomic,strong) HZSubFanButton *currentButton;
 @end
 
 @implementation HZCenterFanButton
@@ -94,9 +96,51 @@
 #pragma mark - delegate
 - (void)clickBtn:(HZSubFanButton *)btn
 {
-    NSLog(@"btn tap %@",@(btn.index));
+//    NSLog(@"btn tap %@",@(btn.index));
 }
 
+- (void)changeBtn:(HZSubFanButton *)btn touch:(UITouch *)touch
+{
+    HZSubFanButton *button = [self touchInSubbutton:touch];
+    if (button) {
+        [self.currentButton unSelected];
+        
+        [button beSelected];
+        self.currentButton = button;
+        
+        return;
+    }
+    
+}
+
+- (void)endBtn:(HZSubFanButton *)btn touch:(UITouch *)touch
+{
+    HZSubFanButton *button = [self touchInSubbutton:touch];
+    if (button) {
+        [self.currentButton unSelected];
+        
+        if ([self.delegate respondsToSelector:@selector(clickBtnWithIndex:)]) {
+            [self.delegate clickBtnWithIndex:self.currentButton.index];
+        }
+        
+        return;
+    }
+    
+    //按钮外松开
+    if (self.currentButton) {
+        [self.currentButton unSelected];
+        
+        if ([self.delegate respondsToSelector:@selector(clickBtnWithIndex:)]) {
+            [self.delegate clickBtnWithIndex:self.currentButton.index];
+        }
+    }
+  
+}
+
+- (HZSubFanButton *)currentSelectedButton
+{
+    return self.currentButton;
+}
 #pragma mark - setter
 - (void)setTitle:(NSString *)title
 {
@@ -114,6 +158,25 @@
     return _centerButton;
 }
 
+- (HZSubFanButton *)touchInSubbutton:(UITouch *)touch
+{
+    CGPoint point = [touch locationInView:self];
+
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[HZSubFanButton class]]) {
+            
+            HZSubFanButton *subButton = (HZSubFanButton *)view;
+            if (CGPathContainsPoint(subButton.bezierPath.CGPath, nil, point, nil)) {
+                
+                return subButton;
+            }
+        }
+    }
+    
+    
+    return nil;
+}
+
 #pragma mark - hit
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
@@ -121,7 +184,7 @@
         return self;
     }
     
-    NSLog(@"UIEvent %@",event);
+    NSLog(@"center fan hitTest:  %@",event);
     
     NSEnumerator *enumertor =[self.subviews reverseObjectEnumerator];
     UIView *view;
@@ -133,6 +196,7 @@
         if ([view isKindOfClass:[HZSubFanButton class]]) {
             HZSubFanButton *btn = (HZSubFanButton *)view;
             if (CGPathContainsPoint(btn.bezierPath.CGPath, nil, point, nil)) {
+                self.currentButton = btn;
                 return btn;
             }
         }
@@ -144,6 +208,7 @@
 {
     [super touchesMoved:touches withEvent:event];
 
+    NSLog(@"center fan touchMove UIEvent %@",event);
     
 }
 @end

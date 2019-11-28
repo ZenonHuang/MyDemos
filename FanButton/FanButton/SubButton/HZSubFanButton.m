@@ -28,6 +28,7 @@
     if (!self) {
         return nil;
     }
+    
     return self;
 }
 
@@ -39,6 +40,25 @@
     button.endAngle   = endAngle;
     return button;
 }
+
+#pragma mark - public
+- (void)beSelected
+{
+    self.isTouch = YES;
+    [self setNeedsDisplay];
+    
+    if ([self.delegate respondsToSelector:@selector(clickBtn:)]) {
+        [self.delegate clickBtn:self];
+    }
+}
+
+- (void)unSelected
+{
+    self.isTouch = NO;
+    [self setNeedsDisplay];
+}
+#pragma mark - action
+
                       
 #pragma mark - override
 - (void)drawRect:(CGRect)rect
@@ -54,19 +74,25 @@
     //关闭路径，是从终点到起点
     [self.bezierPath closePath];
     
+    
     [self.layer addSublayer:self.shapeLayer];
     
     if (self.isTouch) {
-        self.shapeLayer.strokeColor = [UIColor colorWithWhite:1 alpha:1].CGColor;
-        self.shapeLayer.fillColor = [UIColor whiteColor].CGColor;
+      
         
+        self.gradientLayer.frame = self.frame;
         [self.gradientLayer setMask:self.shapeLayer];/** 截取path部分的渐变 */
         [self.layer addSublayer:self.gradientLayer];
-    }else{
-        self.shapeLayer.strokeColor = [UIColor colorWithWhite:1 alpha:0.5].CGColor;
-        self.shapeLayer.fillColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+        //        self.shapeLayer.fillColor =  [UIColor colorWithWhite:0 alpha:1].CGColor;//[UIColor orangeColor].CGColor;
+        self.shapeLayer.strokeColor = [UIColor colorWithWhite:1 alpha:1].CGColor;
         
-        [self.gradientLayer removeFromSuperlayer];
+    }else{
+
+        self.shapeLayer.strokeColor = [UIColor colorWithWhite:1 alpha:0.5].CGColor;
+//        self.shapeLayer.fillColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+        if (self.gradientLayer.superlayer) {
+              [self.gradientLayer removeFromSuperlayer];
+        }
     }
  
 
@@ -96,22 +122,29 @@
         return;
     }
     
+    if ([self.delegate currentSelectedButton]!=self) {
+
+        return;
+    }
+    
     UITouch *touch = [touches anyObject];
     
-    if (CGPathContainsPoint(self.bezierPath.CGPath, NULL, [touch locationInView:self], true)) {
+    if ([self touchInButton:touch]) {
         
         NSLog(@"tap button %@",self);
         
-        self.isTouch = YES;
-//        [[UIColor colorWithWhite:1 alpha:1] setFill];
-//        [self.bezierPath fill];
-        [self setNeedsDisplay];
-        
-        if ([self.delegate respondsToSelector:@selector(clickBtn:)]) {
-            [self.delegate clickBtn:self];
-        }
+        [self beSelected];
     }
     
+}
+
+- (BOOL)touchInButton:(UITouch *)touch
+{
+    if (!self.bezierPath) {
+        return NO;
+    }
+    
+    return  CGPathContainsPoint(self.bezierPath.CGPath, NULL, [touch locationInView:self], true);
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -121,6 +154,18 @@
         return;
     }
     
+    NSLog(@"SubButton touchMove %@",event);
+    UITouch *touch = [touches anyObject];
+    HZSubFanButton *curretButton =  [self.delegate currentSelectedButton];
+    
+    if (![self touchInButton:touch]) {
+        [self.delegate changeBtn:curretButton  touch:touch];
+    }else{
+        if (curretButton!=self) {
+            [self.delegate changeBtn:curretButton touch:touch];
+        }
+    }
+    
 
 }
 
@@ -128,13 +173,24 @@
 {
     [super touchesEnded:touches withEvent:event];
 
-    [self unTouch];
+    
+    HZSubFanButton *button = [self.delegate currentSelectedButton];
+    
+    [button unTouch];
+    UITouch *touch = [touches anyObject];
+    [self.delegate endBtn:button touch:touch];
+    
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
-    [self unTouch];
+    HZSubFanButton *button = [self.delegate currentSelectedButton];
+    
+    [button unTouch];
+    
+    UITouch *touch = [touches anyObject];
+   [self.delegate endBtn:button touch:touch];
 }
 
 - (void)unTouch
@@ -230,7 +286,7 @@
         _shapeLayer = ({
             CAShapeLayer *layer = [[CAShapeLayer alloc] init];
             layer.path =self.bezierPath.CGPath;
-     
+            layer.fillColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
             layer;
         });
     }
@@ -247,7 +303,7 @@
             gradientLayer.colors = @[(__bridge id)ssRGBHex(0xFFA054).CGColor,
                                      (__bridge id)ssRGBHex(0xFE7000).CGColor ];
             gradientLayer.startPoint = CGPointMake(0.5, 0.5);
-            gradientLayer.endPoint = CGPointMake(1, 1);
+            gradientLayer.endPoint = CGPointMake(1.0, 1.0);
             [gradientLayer setLocations:@[@0.3, @0.8, @1]];
             
             gradientLayer;
