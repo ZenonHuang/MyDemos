@@ -120,6 +120,9 @@
     if (!self.centerButton.userInteractionEnabled) {
         return self;
     }
+    
+    NSLog(@"UIEvent %@",event);
+    
     NSEnumerator *enumertor =[self.subviews reverseObjectEnumerator];
     UIView *view;
     while (view = [enumertor nextObject]) {
@@ -137,5 +140,11 @@
     return [super hitTest:point withEvent:event];
 }
 
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+
+    
+}
 @end
 

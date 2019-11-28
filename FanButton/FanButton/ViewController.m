@@ -7,12 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "SubButton/HZSubFanButton.h"
 #import "SubButton/HZCenterFanButton.h"
 
 @interface ViewController ()
-@property (nonatomic,strong) HZSubFanButton *subButton;
-@property (nonatomic,strong) HZSubFanButton *twoButton;
+@property (nonatomic,strong) HZCenterFanButton *centerButton;
 @end
 
 @implementation ViewController
@@ -20,9 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    
-    CGRect rect = CGRectMake(100, 200, 200, 200);
+    CGRect rect = [self rectForCenterButton];
     
     HZCenterFanButton *centerButton = [[HZCenterFanButton alloc] init];
     centerButton.frame = rect;
@@ -33,9 +29,13 @@
     
     [self.view addSubview:centerButton];
     
-    
+    self.centerButton= centerButton;
+}
 
-    
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.centerButton.frame = [self rectForCenterButton];
 }
 
 - (void)clickBtnWithIndex:(NSInteger)index
@@ -43,4 +43,10 @@
     NSLog(@"%li",index);
 }
 
+- (CGRect)rectForCenterButton
+{
+    CGFloat length = 200;
+    CGSize  screenSize = [UIScreen mainScreen].bounds.size;
+    return  CGRectMake( (screenSize.width-length)/2,(screenSize.height-length)/2, length, length );
+}
 @end
