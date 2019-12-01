@@ -37,8 +37,10 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
 
 - (void)HZ_setDelegate:(id<UICollectionViewDelegate>)delegate {
     
-    [self preSwizzleForDelegate:delegate];
-//    [self afterSwizzleForDelegate:delegate];
+    
+#warning todo 核心逻辑
+    [self preSwizzleForDelegate:delegate];//问题方案
+//    [self afterSwizzleForDelegate:delegate];//解决方案
     
     [self HZ_setDelegate:delegate];
 }
@@ -76,12 +78,11 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
             Method originMethod = class_getInstanceMethod(delegate.class, sel);
             
             IMP originIMP = method_getImplementation(originMethod);
-            NSString *originIMPAddress = [NSString stringWithFormat:@"%p",originIMP];
-            
-            NSLog(@"orginClass %@ originMethod %@",NSStringFromClass(delegate.class),originIMPAddress);
+            NSLog(@"orginClass %@ originMethod %p",NSStringFromClass(delegate.class),originIMP);
         
             IMP newIMP =  (IMP)HZ_collectionViewDidSelectRowAtIndexPath;
-
+            NSLog(@"orginClass %@ newMethod %p",NSStringFromClass(delegate.class),newIMP);
+        
             if (originMethod 
                 && !(originIMP==newIMP)) {
             

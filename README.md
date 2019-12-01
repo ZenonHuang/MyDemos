@@ -11,19 +11,21 @@
 
 目录名称 | 说明 |时间
 ------- | ------- | -------
-doubleTapDemo | 双击tabBar刷新原理（双击判断，双击间隔）  |  2016/10/14
-ChristmasTree  | Swift 脚本输出圣诞树🎄               |  2016/12/25
-DragDropCollectionView | cell 晃动拖拽编辑效果         | 2017/01/18
-HZRangeSlider| 双头滑杆，选择数值范围                  | 2017/05/05
-HZGaugeView  | 绘制仪表盘。                            | 2017/06/28
-ARDemo | ARKit 模型使用，立方体放置                     |  2018/01/07
-CopyLabel | 文本复制功能的 label                       |  2018/09/10
-Throttle | 函数节流 / 函数防抖 -- 限制方法调用的频次      |  2018/09/13
-JoyStick | 虚拟摇杆      |  2019/01/14
-FloatView | 悬浮按钮 (自动贴边，定时缩小) |  2019/01/18
-HZCountTimeButton | 倒计时按钮(如验证码) | 2019/01/31
-CollectionViewHook |  Hook 父子类时序造成的问题及解决 | 2019/09/19
+FanButton | 轮盘扇形按钮(多用于游戏控制) | 2019/12/1
 BluetoothForKeyboard | 蓝牙设备连接 | 2019/10/18
+CollectionViewHook |  Hook 父子类时序造成的问题及解决 | 2019/09/19
+HZCountTimeButton | 倒计时按钮(如验证码) | 2019/01/31
+FloatView | 悬浮按钮 (自动贴边，定时缩小) |  2019/01/18
+JoyStick | 虚拟摇杆      |  2019/01/14
+Throttle | 函数节流 / 函数防抖 -- 限制方法调用的频次      |  2018/09/13
+CopyLabel | 文本复制功能的 label                       |  2018/09/10
+ARDemo | ARKit 模型使用，立方体放置                     |  2018/01/07
+HZGaugeView  | 绘制仪表盘。                            | 2017/06/28
+HZRangeSlider| 双头滑杆，选择数值范围                  | 2017/05/05
+DragDropCollectionView | cell 晃动拖拽编辑效果         | 2017/01/18
+ChristmasTree  | Swift 脚本输出圣诞树🎄               |  2016/12/25
+doubleTapDemo | 双击tabBar刷新原理（双击判断，双击间隔）  |  2016/10/14
+
 
 ## 🐚 Shell 脚本 
 
@@ -31,8 +33,9 @@ BluetoothForKeyboard | 蓝牙设备连接 | 2019/10/18
 
 目录名称 | 说明 |时间
 ------- | ------- | -------
-AutoProto | 自动提取服务器的 proto 文件，并输出OC文件  |  2018/11/02
 GitHook | 针对团队要求的规范，利用 Git Hook 来进行程序检查  |  2019/08/09
+AutoProto | 自动提取服务器的 proto 文件，并输出OC文件  |  2018/11/02
+
 
 ## 🌰 文章示例
 
@@ -40,9 +43,11 @@ GitHook | 针对团队要求的规范，利用 Git Hook 来进行程序检查  |
 
 目录名称 | 说明 |时间
 ------- | ------- | -------
- LyoutTest  | frame/Auto Layout/FlexBox布局测试 |  2017/12/23
- YogaSample | Yoga 使用                        |  2017/12/25
  LockForiOS | 实验 iOS 几种锁的情况              |  2018/03/08
+  YogaSample | Yoga 使用                        |  2017/12/25
+ LyoutTest  | frame/Auto Layout/FlexBox布局测试 |  2017/12/23
+
+
 
 
 ## 🥑 资料验证
