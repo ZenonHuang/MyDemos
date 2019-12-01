@@ -8,10 +8,16 @@
 
 #import "HZSubFanButton.h"
 
+#define ssRGBHex(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define ssRGBHexAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:(a)]
+
 @interface HZSubFanButton ()
 @property (nonatomic, assign) CGPathRef path;//用于判断点击是否在画出来图形中
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) CAShapeLayer *shapeLayer;
 
+@property (nonatomic, assign) BOOL isTouch;
+@property (nonatomic, strong) CAGradientLayer *gradientLayer;
 @end
 
 @implementation HZSubFanButton
@@ -22,6 +28,7 @@
     if (!self) {
         return nil;
     }
+    
     return self;
 }
 
@@ -33,67 +40,78 @@
     button.endAngle   = endAngle;
     return button;
 }
+
+#pragma mark - public
+- (void)beSelected
+{
+    self.isTouch = YES;
+    [self setNeedsDisplay];
+    
+    if ([self.delegate respondsToSelector:@selector(clickBtn:)]) {
+        [self.delegate clickBtn:self];
+    }
+}
+
+- (void)unSelected
+{
+    self.isTouch = NO;
+    [self setNeedsDisplay];
+}
+#pragma mark - action
+
                       
 #pragma mark - override
 - (void)drawRect:(CGRect)rect
 {
 //    CGPoint originPoint = self.frame.origin;
     CGSize  buttonSize  = self.frame.size;
-    //圆的起点是中心点右边的点
-    //ArcCenter:圆心坐标
-    //radius:半径
-    //startAngle:弧度起始角度
-    //endAngle:弧度结束  M_PI==180度
-    //clockwise:YES:顺时针NO:逆时针
-    CGPoint cneterPoint = CGPointMake(buttonSize.width/2, buttonSize.height/2);
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:cneterPoint//CGPointMake(100, 100)
-                                                        radius:buttonSize.width/2
-                                                    startAngle:self.startAngle
-                                                      endAngle:self.endAngle
-                                                     clockwise:YES];
-    CGPoint center = cneterPoint;;//CGPointMake(0, 0);//CGPointMake(100, 100);
-    
+    CGPoint center = CGPointMake(buttonSize.width/2, buttonSize.height/2);
+
     // 设置描边宽度
-    [path setLineWidth:1.0];
-    
+    [self.bezierPath setLineWidth:1.0];
     //添加线到圆心
-    [path addLineToPoint:center];
+    [self.bezierPath addLineToPoint:center];
     //关闭路径，是从终点到起点
-    [path closePath];
-    
-    //设置颜色（颜色设置也可以放在最上面，只要在绘制前都可以）
-    
-    [[UIColor orangeColor] setStroke];
-    
-    [[UIColor colorWithWhite:0 alpha:0.5] setFill];
-    
-    //描边
-    [path stroke];
-    //使用填充，默认就会自动关闭路径，（终点到起点）这样就可以不写[path closePath];
-    [path fill];
+    [self.bezierPath closePath];
     
     
-//    CAShapeLayer *layer = [[CAShapeLayer alloc] init];
-//    layer.path = path.CGPath;
-//    layer.strokeColor = [UIColor orangeColor].CGColor;
-////    layer.fillColor = .CGColor;
-//    layer.backgroundColor = [UIColor purpleColor].CGColor;
-//    [self.layer addSublayer:layer];
+    [self.layer addSublayer:self.shapeLayer];
     
-//    self.path = [path CGPath];
-    
-    self.bezierPath = path;
+    if (self.isTouch) {
+      
+        
+        self.gradientLayer.frame = self.frame;
+        [self.gradientLayer setMask:self.shapeLayer];/** 截取path部分的渐变 */
+        [self.layer addSublayer:self.gradientLayer];
+        //        self.shapeLayer.fillColor =  [UIColor colorWithWhite:0 alpha:1].CGColor;//[UIColor orangeColor].CGColor;
+        self.shapeLayer.strokeColor = [UIColor colorWithWhite:1 alpha:1].CGColor;
+        
+    }else{
+
+        self.shapeLayer.strokeColor = [UIColor colorWithWhite:1 alpha:0.5].CGColor;
+//        self.shapeLayer.fillColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+        if (self.gradientLayer.superlayer) {
+              [self.gradientLayer removeFromSuperlayer];
+        }
+    }
+ 
+
 }
 
-- (void)setHighlighted:(BOOL)highlighted
+- (void)layoutSubviews
 {
-    [super setHighlighted:highlighted];
+    [super layoutSubviews];
     
-//    if (highlighted) {
-//        self.backgroundColor = [UIColor orangeColor];
-//    }else{
-//        self.backgroundColor = [UIColor blackColor];
-//    }
+    if (!self.textLabel) {
+        self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        self.textLabel.font = [UIFont systemFontOfSize:11];
+        self.textLabel.textColor = [UIColor whiteColor];
+        self.textLabel.numberOfLines = 0;
+        
+        [self layoutTextLabel];
+    }
+    [self addSubview:self.textLabel];
+    
 }
 
 #pragma mark - touch event
@@ -104,19 +122,89 @@
         return;
     }
     
+    if ([self.delegate currentSelectedButton]!=self) {
+
+        return;
+    }
+    
     UITouch *touch = [touches anyObject];
     
-    if (CGPathContainsPoint(self.bezierPath.CGPath, NULL, [touch locationInView:self], true)) {
+    if ([self touchInButton:touch]) {
         
         NSLog(@"tap button %@",self);
         
-        if ([self.delegate respondsToSelector:@selector(clickBtn:)]) {
-            [self.delegate clickBtn:self];
-        }
+        [self beSelected];
     }
     
 }
 
+- (BOOL)touchInButton:(UITouch *)touch
+{
+    if (!self.bezierPath) {
+        return NO;
+    }
+    
+    return  CGPathContainsPoint(self.bezierPath.CGPath, NULL, [touch locationInView:self], true);
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+    if (!self.bezierPath) {
+        return;
+    }
+    
+    NSLog(@"SubButton touchMove %@",event);
+    UITouch *touch = [touches anyObject];
+    HZSubFanButton *curretButton =  [self.delegate currentSelectedButton];
+    
+    if (![self touchInButton:touch]) {
+        [self.delegate changeBtn:curretButton  touch:touch];
+    }else{
+        if (curretButton!=self) {
+            [self.delegate changeBtn:curretButton touch:touch];
+        }
+    }
+    
+
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+
+    
+    HZSubFanButton *button = [self.delegate currentSelectedButton];
+    
+    [button unTouch];
+    UITouch *touch = [touches anyObject];
+    [self.delegate endBtn:button touch:touch];
+    
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesCancelled:touches withEvent:event];
+    HZSubFanButton *button = [self.delegate currentSelectedButton];
+    
+    [button unTouch];
+    
+    UITouch *touch = [touches anyObject];
+   [self.delegate endBtn:button touch:touch];
+}
+
+- (void)unTouch
+{
+    if (!self.bezierPath) {
+        return;
+    }
+    
+    if (self.isTouch) {
+        self.isTouch = NO;
+        //    赋值结束之后要刷新UI，不然看不到扇形的变化
+        [self setNeedsDisplay];
+    }
+}
 #pragma mark - label
 
 - (void)layoutTextLabel
@@ -135,19 +223,7 @@
 
 }
 
-- (void)layoutSubviews
-{
-    if (!self.textLabel) {
-        self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        self.textLabel.font = [UIFont systemFontOfSize:11];
-        self.textLabel.textColor = [UIColor orangeColor];
-        self.textLabel.numberOfLines = 0;
-        [self addSubview:self.textLabel];
-        [self layoutTextLabel];
-    }
-    
-    
-}
+
 
 - (CGPoint)textLabelPoint
 {
@@ -178,4 +254,61 @@
     return angle;
 }
 
+#pragma mark - getter
+
+- (UIBezierPath *)bezierPath
+{
+    if (!_bezierPath) {
+        _bezierPath = ({
+            CGSize  buttonSize  = self.frame.size;
+            //圆的起点是中心点右边的点
+            //ArcCenter:圆心坐标
+            //radius:半径
+            //startAngle:弧度起始角度
+            //endAngle:弧度结束  M_PI==180度
+            //clockwise:YES:顺时针NO:逆时针
+            CGPoint cneterPoint = CGPointMake(buttonSize.width/2, buttonSize.height/2);
+            UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:cneterPoint//CGPointMake(100, 100)
+                                                                radius:buttonSize.width/2
+                                                            startAngle:self.startAngle
+                                                              endAngle:self.endAngle
+                                                             clockwise:YES];
+            
+            path;
+        });
+    }
+    return _bezierPath;
+}
+
+- (CAShapeLayer *)shapeLayer
+{
+    if (!_shapeLayer) {
+        _shapeLayer = ({
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            layer.path =self.bezierPath.CGPath;
+            layer.fillColor = [UIColor colorWithWhite:0 alpha:0.5].CGColor;
+            layer;
+        });
+    }
+    return _shapeLayer;
+}
+
+- (CAGradientLayer *)gradientLayer
+{
+    if (!_gradientLayer) {
+        _gradientLayer = ({
+            CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+            gradientLayer.frame = self.frame;
+            gradientLayer.type = kCAGradientLayerRadial;// kCAGradientLayerAxial;
+            gradientLayer.colors = @[(__bridge id)ssRGBHex(0xFFA054).CGColor,
+                                     (__bridge id)ssRGBHex(0xFE7000).CGColor ];
+            gradientLayer.startPoint = CGPointMake(0.5, 0.5);
+            gradientLayer.endPoint = CGPointMake(1.0, 1.0);
+            [gradientLayer setLocations:@[@0.3, @0.8, @1]];
+            
+            gradientLayer;
+        });
+    }
+    return _gradientLayer;
+}
 @end

@@ -15,6 +15,11 @@
 @optional
 - (void)clickBtn:(HZSubFanButton *)btn;
 
+- (void)changeBtn:(HZSubFanButton *)btn touch:(UITouch *)touch;
+
+- (void)endBtn:(HZSubFanButton *)btn touch:(UITouch *)touch;
+
+- (HZSubFanButton *)currentSelectedButton;
 @end
 
 @interface HZSubFanButton : UIButton
@@ -31,4 +36,7 @@
  
 + (instancetype)buttonWithAngle:(CGFloat)startAngle
                        endAngle:(CGFloat)endAngle;
+
+- (void)unSelected;
+- (void)beSelected;
 @end

@@ -12,6 +12,8 @@
 @interface HZCenterFanButton ()<HZSubFanButtonDelegate>
 @property (nonatomic,strong) UIButton *centerButton;
 @property (nonatomic,assign) BOOL  hasInsert;
+
+@property (nonatomic,strong) HZSubFanButton *currentButton;
 @end
 
 @implementation HZCenterFanButton
@@ -94,9 +96,51 @@
 #pragma mark - delegate
 - (void)clickBtn:(HZSubFanButton *)btn
 {
-    NSLog(@"btn tap %@",@(btn.index));
+//    NSLog(@"btn tap %@",@(btn.index));
 }
 
+- (void)changeBtn:(HZSubFanButton *)btn touch:(UITouch *)touch
+{
+    HZSubFanButton *button = [self touchInSubbutton:touch];
+    if (button) {
+        [self.currentButton unSelected];
+        
+        [button beSelected];
+        self.currentButton = button;
+        
+        return;
+    }
+    
+}
+
+- (void)endBtn:(HZSubFanButton *)btn touch:(UITouch *)touch
+{
+    HZSubFanButton *button = [self touchInSubbutton:touch];
+    if (button) {
+        [self.currentButton unSelected];
+        
+        if ([self.delegate respondsToSelector:@selector(clickBtnWithIndex:)]) {
+            [self.delegate clickBtnWithIndex:self.currentButton.index];
+        }
+        
+        return;
+    }
+    
+    //按钮外松开
+    if (self.currentButton) {
+        [self.currentButton unSelected];
+        
+        if ([self.delegate respondsToSelector:@selector(clickBtnWithIndex:)]) {
+            [self.delegate clickBtnWithIndex:self.currentButton.index];
+        }
+    }
+  
+}
+
+- (HZSubFanButton *)currentSelectedButton
+{
+    return self.currentButton;
+}
 #pragma mark - setter
 - (void)setTitle:(NSString *)title
 {
@@ -114,12 +158,82 @@
     return _centerButton;
 }
 
+- (HZSubFanButton *)subButtonForPoint:(CGPoint)point
+{
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:[HZSubFanButton class]]) {
+            
+            HZSubFanButton *subButton = (HZSubFanButton *)view;
+            if (CGPathContainsPoint(subButton.bezierPath.CGPath, nil, point, nil)) {
+                
+                return subButton;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
+- (HZSubFanButton *)touchInSubbutton:(UITouch *)touch
+{
+    CGPoint point = [touch locationInView:self];
+    //落点在圆内
+    HZSubFanButton *button = [self subButtonForPoint:point];
+    if (button) {
+        return button;
+    }
+    //落点在圆外
+    CGFloat centrex = self.frame.size.width/2;          //圆心X
+    CGFloat centrey = self.frame.size.height/2;         //圆心Y
+    CGFloat radius = self.frame.size.width/2;//半径
+    CGFloat x;              //坐标系X
+    CGFloat y;              //坐标系Y
+
+    x = point.x - centrex;
+    y = centrey - point.y;
+    
+    float current_radius =  sqrtf(x*x + y*y);           //计算改点到圆心的距离
+    if(current_radius > radius)
+    {
+        float circlex = fabs(x) / current_radius * radius;
+        float circley = fabs(y) / current_radius * radius;
+        if(x < 0 && y > 0)
+        {
+            x = centrex - circlex;
+            y = centrey - circley;
+        }
+        else if(x > 0 && y > 0)
+        {
+            x = centrex + circlex;
+            y = centrey - circley;
+        }
+        else if(x < 0 && y < 0)
+        {
+            x = centrex - circlex;
+            y = centrey + circley;
+        }
+        else if (x > 0 && y < 0)
+        {
+            x = centrex + circlex;
+            y = centrey + circley;
+        }
+        
+        CGPoint newPoint = CGPointMake(x, y);
+        return  [self subButtonForPoint:newPoint];
+    }
+    return nil;
+}
+
 #pragma mark - hit
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
     if (!self.centerButton.userInteractionEnabled) {
         return self;
     }
+    
+    NSLog(@"center fan hitTest:  %@",event);
+    
     NSEnumerator *enumertor =[self.subviews reverseObjectEnumerator];
     UIView *view;
     while (view = [enumertor nextObject]) {
@@ -130,6 +244,7 @@
         if ([view isKindOfClass:[HZSubFanButton class]]) {
             HZSubFanButton *btn = (HZSubFanButton *)view;
             if (CGPathContainsPoint(btn.bezierPath.CGPath, nil, point, nil)) {
+                self.currentButton = btn;
                 return btn;
             }
         }
@@ -137,5 +252,12 @@
     return [super hitTest:point withEvent:event];
 }
 
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+
+    NSLog(@"center fan touchMove UIEvent %@",event);
+    
+}
 @end
 

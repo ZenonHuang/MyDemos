@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class HZCenterFanButton;
+
+@protocol HZCenterFanButtonDelegate <NSObject>
+
+@optional
+- (void)clickBtnWithIndex:(NSInteger)index;
+@end
+
 @interface HZCenterFanButton : UIControl
 @property (nonatomic,strong) NSArray  *textList;
 @property (nonatomic,copy)   NSString *title;
+
+@property (nonatomic,weak) id<HZCenterFanButtonDelegate> delegate;
 @end
