@@ -16,8 +16,7 @@
 void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionView *collectionView, NSIndexPath *indexPath) {
     
    //Do tracker something
-    NSLog(@"_cmd %@",NSStringFromSelector(_cmd));
-    //调到这里肯定实现了HZ_tableView:didSelectRowAtIndexPath:，去除warning
+    NSLog(@"日志: tracker _cmd %@",NSStringFromSelector(_cmd));
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     
@@ -30,7 +29,23 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
 
 @implementation UICollectionView (Tracker)
 
++ (void)HZ_swizzle {
+    [UICollectionView HZ_swizzleMethod:@selector(setDelegate:)
+                                newSel:@selector(HZ_setDelegate:)];
+}
+
+
 - (void)HZ_setDelegate:(id<UICollectionViewDelegate>)delegate {
+    
+    [self preSwizzleForDelegate:delegate];
+//    [self afterSwizzleForDelegate:delegate];
+    
+    [self HZ_setDelegate:delegate];
+}
+
+
+// 问题方案
+- (void)preSwizzleForDelegate:(id<UICollectionViewDelegate>)delegate {
     if ([delegate isKindOfClass:[NSObject class]]) {
         SEL sel = @selector(collectionView:didSelectItemAtIndexPath:);
         
@@ -39,29 +54,43 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
         
         Method originMethod = class_getInstanceMethod(delegate.class, sel);
         
-        NSString *originMethodAddress = [NSString stringWithFormat:@"%p",originMethod];
-        NSLog(@"originMethod %@",originMethodAddress);
-        
-//问题方案        if (originMethod && ![delegate.class HZ_methodHasSwizzed:sel]) {
-/**   解决方案 **/
-        if (originMethod && ![[HZTrackerCenter sharedInstance] HZ_swizzleHasSetMethodFor:originMethodAddress]) {
-        
+        if (originMethod && ![delegate.class HZ_methodHasSwizzed:sel]) {   
             IMP newIMP =  (IMP)HZ_collectionViewDidSelectRowAtIndexPath;
             class_addMethod(delegate.class, newSel,newIMP, method_getTypeEncoding(originMethod));
+            
             [delegate.class HZ_swizzleMethod:sel newSel:newSel];
             
             [delegate.class HZ_setMethodHasSwizzed:sel];
-            [[HZTrackerCenter sharedInstance] HZ_swizzleSetMethod:originMethodAddress
-                                                          forClss:NSStringFromClass(delegate.class) ];
         }
     }
-    [self HZ_setDelegate:delegate];
 }
 
-+ (void)HZ_swizzle {
-    [UICollectionView HZ_swizzleMethod:@selector(setDelegate:)
-                                newSel:@selector(HZ_setDelegate:)];
+//解决方案
+- (void)afterSwizzleForDelegate:(id<UICollectionViewDelegate>)delegate {
+    if ([delegate isKindOfClass:[NSObject class]]) {
+            SEL sel = @selector(collectionView:didSelectItemAtIndexPath:);
+            
+            //newSel = HZ_collectionView:didSelectItemAtIndexPath:
+            SEL newSel = [NSObject HZ_newSelFormOriginalSel:sel ];
+            
+            Method originMethod = class_getInstanceMethod(delegate.class, sel);
+            
+            IMP originIMP = method_getImplementation(originMethod);
+            NSString *originIMPAddress = [NSString stringWithFormat:@"%p",originIMP];
+            
+            NSLog(@"orginClass %@ originMethod %@",NSStringFromClass(delegate.class),originIMPAddress);
+        
+            IMP newIMP =  (IMP)HZ_collectionViewDidSelectRowAtIndexPath;
+
+            if (originMethod 
+                && !(originIMP==newIMP)) {
+            
+                class_addMethod(delegate.class, newSel,newIMP, method_getTypeEncoding(originMethod));
+                [delegate.class HZ_swizzleMethod:sel newSel:newSel];
+            }
+        }
 }
+
 
 @end
 

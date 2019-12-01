@@ -35,12 +35,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"tap");
-//    HZ_collectionView:didSelectItemAtIndexPath: 相当于调用自己这个方法
-//    SEL sel = [NSObject HZ_newSelFormOriginalSel:@selector(collectionView:didSelectItemAtIndexPath:)];
-//    [self performSelector:sel
-//               withObject:collectionView 
-//               withObject:indexPath];
+    NSLog(@"tap class %@",NSStringFromClass([self class]));
+
 }
 
 //mark: UICollectionViewDataSource 
@@ -60,6 +56,7 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
     cell.backgroundColor = [UIColor grayColor];
+    cell.accessibilityLabel = @"23423";
     return cell;
 }
 

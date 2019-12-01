@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "UICollectionView+Tracker.h"
+#import "HZTrackerCenter.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [UICollectionView HZ_swizzle];
+    [[HZTrackerCenter sharedInstance] beginTracker];
     return YES;
 }
 

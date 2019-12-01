@@ -11,6 +11,7 @@
 @interface HZTrackerCenter : NSObject
 
 + (instancetype)sharedInstance;
-- (void)HZ_swizzleSetMethod:(NSString *)key forClss:(NSString *)value;
-- (BOOL)HZ_swizzleHasSetMethodFor:(NSString *)key;
+
+- (void)beginTracker;
+
 @end
