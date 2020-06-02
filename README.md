@@ -43,10 +43,10 @@ AutoProto | 自动提取服务器的 proto 文件，并输出OC文件  |  2018/1
 
 目录名称 | 说明 |时间
 ------- | ------- | -------
- LockForiOS | 实验 iOS 几种锁的情况              |  2018/03/08
-  YogaSample | Yoga 使用                        |  2017/12/25
- LyoutTest  | frame/Auto Layout/FlexBox布局测试 |  2017/12/23
-
+WeakProxy |  YYWeakProxy 完整消息转发的意义，避免少数情况释放 target 导致崩溃    |  2020/06/02
+LockForiOS | 实验 iOS 几种锁的情况              |  2018/03/08
+YogaSample | Yoga 使用                        |  2017/12/25
+LyoutTest  | frame/Auto Layout/FlexBox布局测试 |  2017/12/23
 
 
 
