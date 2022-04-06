@@ -33,11 +33,13 @@
      [self addSubview:self.collectionView];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"tap class %@",NSStringFromClass([self class]));
-
-}
+// UICollectionView+Tracker.m内，当方法交换前，先判断delegate未实现该方法，那就(动态的)先添加该方法对应的一个实现，再去做方法交换
+// 好处：即使delegate未实现代理方法（如注释掉如下方法），也能成功hook，也就一定能在hook时做额外的想要的操作了。
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSLog(@"tap class %@, indexPath: %@",NSStringFromClass([self class]), indexPath);
+//
+//}
 
 //mark: UICollectionViewDataSource 
 
