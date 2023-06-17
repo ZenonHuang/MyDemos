@@ -39,8 +39,8 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
     
     
 #warning todo 核心逻辑
-    [self preSwizzleForDelegate:delegate];//问题方案
-//    [self afterSwizzleForDelegate:delegate];//解决方案
+//    [self preSwizzleForDelegate:delegate];//问题方案
+    [self afterSwizzleForDelegate:delegate];//解决方案
     
     [self HZ_setDelegate:delegate];
 }
@@ -82,7 +82,22 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
         
             IMP newIMP =  (IMP)HZ_collectionViewDidSelectRowAtIndexPath;
             NSLog(@"orginClass %@ newMethod %p",NSStringFromClass(delegate.class),newIMP);
+      
+      // -------- delegate对象没实现sel时  -------- begin -------- //
+      // ---- 若delegate未实现该代理方法，那就给其动态添加一个默认实现 - 旧方法，然后就可以 使用swizzle魔法 以旧换新。
+      if (![delegate respondsToSelector:sel]) {
+        //BOOL addOK =
+        class_addMethod([delegate class],
+                        sel,
+                        (IMP)twoParamsMethod,
+                        method_getTypeEncoding(class_getInstanceMethod(delegate.class, newSel)));
+        //NSLog(@" %@ ------- addOK:%@", delegate, @(addOK));
         
+        originMethod = class_getInstanceMethod(delegate.class, sel);
+      }
+      // -------- delegate对象没实现sel时  -------- end -------- //
+      // 好处：如上这样处理后，该工具可以放心提供给他人使用了，不用担心接入者写代码时 是否实现了'collectionView:didSelectItemAtIndexPath:'
+
             if (originMethod 
                 && !(originIMP==newIMP)) {
             
@@ -92,6 +107,9 @@ void HZ_collectionViewDidSelectRowAtIndexPath(id self, SEL _cmd, UICollectionVie
         }
 }
 
+void twoParamsMethod(id self, SEL _cmd, UICollectionView *collectionView, NSIndexPath *indexPath) {
+  NSLog(@" ------- twoParamsMethod: %@, \nscrollView: %@\nindexPath: %@", self, collectionView, indexPath);
+}
 
 @end
 
