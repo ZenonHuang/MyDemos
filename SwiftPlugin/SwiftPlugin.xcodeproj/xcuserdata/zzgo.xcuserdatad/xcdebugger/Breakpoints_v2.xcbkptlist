@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "34CDA1DF-9C18-465B-AF27-BA18F057B569"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D9B61CDA-A168-4A19-ACD7-DE515FA7D599"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftPlugin/Plugin/HZEventDispatcher.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "dispatchEvent(_:info:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D9B61CDA-A168-4A19-ACD7-DE515FA7D599 - a52f30adb1b2b400"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftPlugin.HZEventDispatcher.dispatchEvent(_: Swift.String, info: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; ()"
+                  moduleName = "SwiftPlugin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zzgo/repo/MyDemos/SwiftPlugin/SwiftPlugin/Plugin/HZEventDispatcher.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "223">
+               </Location>
+               <Location
+                  uuid = "D9B61CDA-A168-4A19-ACD7-DE515FA7D599 - a52f30adb1b2cb19"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftPlugin.HZEventDispatcher.dispatchEvent(_: Swift.String, info: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; ()"
+                  moduleName = "SwiftPlugin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zzgo/repo/MyDemos/SwiftPlugin/SwiftPlugin/Plugin/HZEventDispatcher.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "223">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
